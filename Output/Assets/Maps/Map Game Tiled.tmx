@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="150" height="25" tilewidth="23" tileheight="23" infinite="0" nextlayerid="13" nextobjectid="2">
  <tileset firstgid="1" name="oak_woods_tileset" tilewidth="23" tileheight="23" spacing="1" margin="1" tilecount="315" columns="21">
-  <image source="../Downloads/oak_woods_tileset.png" width="504" height="360"/>
+  <image source="oak_woods_tileset.png" width="504" height="360"/>
  </tileset>
  <tileset firstgid="316" name="sign" tilewidth="22" tileheight="31" tilecount="1" columns="1">
-  <image source="../Downloads/sign.png" width="22" height="31"/>
+  <image source="sign.png" width="22" height="31"/>
  </tileset>
  <tileset firstgid="317" name="rock_3" tilewidth="45" tileheight="18" tilecount="1" columns="1">
-  <image source="../Downloads/rock_3.png" width="45" height="18"/>
+  <image source="rock_3.png" width="45" height="18"/>
  </tileset>
  <tileset firstgid="318" name="rock_2" tilewidth="27" tileheight="12" tilecount="1" columns="1">
-  <image source="../Downloads/rock_2.png" width="27" height="12"/>
+  <image source="rock_2.png" width="27" height="12"/>
  </tileset>
  <tileset firstgid="319" name="rock_1" tilewidth="20" tileheight="11" tilecount="1" columns="1">
-  <image source="../Downloads/rock_1.png" width="20" height="11"/>
+  <image source="rock_1.png" width="20" height="11"/>
  </tileset>
  <tileset firstgid="320" name="lamp" tilewidth="23" tileheight="57" tilecount="1" columns="1">
-  <image source="../Downloads/lamp.png" width="23" height="57"/>
+  <image source="lamp.png" width="23" height="57"/>
  </tileset>
  <tileset firstgid="321" name="grass_3" tilewidth="9" tileheight="4" tilecount="1" columns="1">
-  <image source="../Downloads/grass_3.png" width="9" height="4"/>
+  <image source="grass_3.png" width="9" height="4"/>
  </tileset>
  <tileset firstgid="322" name="grass_2" tilewidth="10" tileheight="5" tilecount="1" columns="1">
-  <image source="../Downloads/grass_2.png" width="10" height="5"/>
+  <image source="grass_2.png" width="10" height="5"/>
  </tileset>
  <tileset firstgid="323" name="grass_1" tilewidth="8" tileheight="3" tilecount="1" columns="1">
-  <image source="../Downloads/grass_1.png" width="8" height="3"/>
+  <image source="grass_1.png" width="8" height="3"/>
  </tileset>
  <tileset firstgid="324" name="fence_1" tilewidth="73" tileheight="19" tilecount="1" columns="1">
-  <image source="../Downloads/fence_1.png" width="73" height="19"/>
+  <image source="fence_1.png" width="73" height="19"/>
  </tileset>
  <tileset firstgid="325" name="VermellVerd" tilewidth="23" tileheight="23" tilecount="2" columns="2">
-  <image source="../Pictures/VermellVerd.png" width="46" height="23"/>
+  <image source="VermellVerd.png" width="46" height="23"/>
  </tileset>
  <layer id="12" name="Fondo 24" width="150" height="25">
   <data encoding="csv">
