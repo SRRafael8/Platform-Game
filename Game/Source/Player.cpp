@@ -75,7 +75,7 @@ bool Player::CleanUp()
 {
 
 	return true;
-}}}
+}
 
 // L07 TODO 6: Define OnCollision function for the player. Check the virtual function on Entity class
 
