@@ -23,7 +23,9 @@ public:
 
 	bool CleanUp();
 
-	// L07 TODO 6: Define OnCollision function for the player. Check the virtual function on Entity class
+	// L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
+	void OnCollision(PhysBody* physA, PhysBody* physB);
+
 
 public:
 
@@ -33,11 +35,10 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 
-	//Audio fx
+	// L07 DONE 5: Add physics to the player - declare a Physics body
+	PhysBody* pbody;
+
 	int pickCoinFxId;
-
-	// L07 TODO 5: Add physics to the player - declare a Physics body
-
 
 };
 
