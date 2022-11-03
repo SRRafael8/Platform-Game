@@ -71,10 +71,6 @@ bool Player::Update()
 	else {
 		b2Vec2(0, -GRAVITY_Y);
 	}
-	
-	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		//
-	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
