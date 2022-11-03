@@ -193,15 +193,23 @@ bool Map::Load()
     
     // L07 DONE 3: Create colliders
     // Later you can create a function here to load and create the colliders from the map
-    PhysBody* c1 = app->physics->CreateRectangle(224 + 128, 543 + 32, 256, 64, STATIC);
-    // L07 DONE 7: Assign collider type
-    c1->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c2 = app->physics->CreateRectangle(352 + 64, 384 + 32, 128, 64, STATIC);
-    // L07 DONE 7: Assign collider type
+    //plataforma3
+    PhysBody* c1 = app->physics->CreateRectangle(23*29+57, 704 + 32 - 206,23*5, 4 * 23, STATIC);
+    c1->ctype = ColliderType::PLATFORM;
+    PhysBody* c4 = app->physics->CreateRectangle(23 * 35, 704 + 32 - 206-12, 23 * 2, 5 * 23, STATIC);
+    c4->ctype = ColliderType::PLATFORM;
+    PhysBody* c5 = app->physics->CreateRectangle(23 * 37, 704 + 32 - 206 - 24, 23 * 2, 6 * 23, STATIC);
+    c5->ctype = ColliderType::PLATFORM;
+    PhysBody* c6 = app->physics->CreateRectangle(23 * 41 +12, 704 + 32 - 206 - 35, 23 * 7, 7 * 23, STATIC);
+    c6->ctype = ColliderType::PLATFORM;
+
+    //plataforma 2
+    PhysBody* c2 = app->physics->CreateRectangle(540, 704 + 32 - 206, 23*7, 4*23, STATIC);
     c2->ctype = ColliderType::PLATFORM;
 
-    PhysBody* c3 = app->physics->CreateRectangle(256, 704 + 32, 576, 64, STATIC);
+    //Plataforma 1
+    PhysBody* c3 = app->physics->CreateRectangle(195, 704 + 32 - 206, 23*17, 4*23, STATIC);
     // L07 DONE 7: Assign collider type
     c3->ctype = ColliderType::PLATFORM;
 
