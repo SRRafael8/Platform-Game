@@ -59,31 +59,43 @@ bool Player::Update()
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
 	int speed = 5; 
+	
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	
-	while (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN && time>0) {
-		vel = b2Vec2(0, +GRAVITY_Y-69);
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time>0) {
+		vel = b2Vec2(0, +2*GRAVITY_Y);
 		time--;
 	}
+	else {
+		b2Vec2(0, -GRAVITY_Y);
+	}
+	
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		//
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-			vel = b2Vec2(0, +GRAVITY_Y - 69);
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time > 0) {
+			vel = b2Vec2(-speed, +2*GRAVITY_Y);
+			time--;
 		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_DOWN) {
-			vel = b2Vec2(0, +GRAVITY_Y - 69);
+		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time > 0) {
+			vel = b2Vec2(speed, +2*GRAVITY_Y);
+			time--;
 		}
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP) {
+		time = 0;
+	}
+
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);
@@ -115,6 +127,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
+			time = 20;
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");

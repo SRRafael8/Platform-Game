@@ -39,7 +39,8 @@ private:
 	PhysBody* pbody;
 
 	int pickCoinFxId;
-	int time = 100;
+	int time = 20;
+	
 
 };
 
