@@ -223,32 +223,56 @@ bool Map::Load()
     c8->ctype = ColliderType::PLATFORM;
 
     //plataforma 6
-    
+    PhysBody* c9 = app->physics->CreateRectangle( 23*75-12 , 704 + 32 - 195, 23 * 19, 3 * 23, STATIC);
+    c9->ctype = ColliderType::PLATFORM;
 
     //plataforma 7
-    
+    PhysBody* c10 = app->physics->CreateRectangle(23 * 75 - 12, 704 + 32 - 195, 23 * 19, 3 * 23, STATIC);
+    c10->ctype = ColliderType::PLATFORM;
     
     //plataforma 8
-    
+    PhysBody* c11 = app->physics->CreateRectangle(23 * 90 - 12, 704 + 32 - 195, 23 * 5, 3 * 23, STATIC);
+    c11->ctype = ColliderType::PLATFORM;
     
     //plataforma 9
-     
+    PhysBody* c12 = app->physics->CreateRectangle(23 * 96, 704 + 32 - 218, 23 * 8, 5 * 23, STATIC);
+    c12->ctype = ColliderType::PLATFORM;
     
     //plataforma 10
-     
+    PhysBody* c13 = app->physics->CreateRectangle(23 * 101 + 12, 704 + 32 - 287, 23 * 7, 3 * 23, STATIC);
+    c13->ctype = ColliderType::PLATFORM;
     
     //plataforma 11
-     
+    PhysBody* c14 = app->physics->CreateRectangle(23 * 101 + 12 + 7*23, 5*23 + 704 + 32 - 287, 23 * 17, 1 * 23, STATIC);
+    c14->ctype = ColliderType::PLATFORM;
     
     //plataforma 12
-     
+    PhysBody* c15 = app->physics->CreateRectangle(23 * 113 + 12 + 7 * 23, 4 * 23 + 704 + 32 - 287, 23 * 3, 1 * 23, STATIC);
+    c15->ctype = ColliderType::PLATFORM;
     
     //plataforma 13
-    
+    PhysBody* c16 = app->physics->CreateRectangle(23 * 125, 3 * 23 + 704 + 32 - 287, 23 * 2, 1 * 23, STATIC);
+    c16->ctype = ColliderType::PLATFORM;
 
     //plataforma 14
+    PhysBody* c17 = app->physics->CreateRectangle(23 * 129, 2 * 23 + 704 + 32 - 287, 23 * 2, 1 * 23, STATIC);
+    c17->ctype = ColliderType::PLATFORM;
 
+    //plataforma 15
+    PhysBody* c18 = app->physics->CreateRectangle(23 * 133+12, 1 * 23 + 704 + 32 - 287, 23 * 1, 1 * 23, STATIC);
+    c18->ctype = ColliderType::PLATFORM;
 
+    //plataforma 16
+    PhysBody* c19 = app->physics->CreateRectangle(23 * 136 + 12, -1 * 23 + 704 + 32 - 287, 23 * 1, 1 * 23, STATIC);
+    c19->ctype = ColliderType::PLATFORM;
+
+    //plataforma 17
+    PhysBody* c20 = app->physics->CreateRectangle(23 * 139 + 12, 0 * 23 + 704 + 32 - 287, 23 * 1, 1 * 23, STATIC);
+    c20->ctype = ColliderType::PLATFORM;
+
+    //plataforma 18
+    PhysBody* c21 = app->physics->CreateRectangle(23 * 146, 1 * 23 + 704 + 32 - 275, 23 * 8, 8 * 23, STATIC);
+    c21->ctype = ColliderType::PLATFORM;
 
     if(ret == true)
     {
