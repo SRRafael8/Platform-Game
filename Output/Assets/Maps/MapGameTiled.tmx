@@ -39,7 +39,10 @@
    <property name="Draw" type="bool" value="true"/>
   </properties>
  </imagelayer>
- <layer id="12" name="Fondo 24" width="150" height="25" visible="0">
+ <layer id="12" name="Fondo 24" width="150" height="25">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -3793,7 +3796,10 @@
    <tile/>
   </data>
  </layer>
- <layer id="11" name="Fondo 2" width="150" height="25" visible="0">
+ <layer id="11" name="Fondo 2" width="150" height="25">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -7547,7 +7553,10 @@
    <tile/>
   </data>
  </layer>
- <layer id="8" name="Fondo 1" width="150" height="25" visible="0">
+ <layer id="8" name="Fondo 1" width="150" height="25">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
