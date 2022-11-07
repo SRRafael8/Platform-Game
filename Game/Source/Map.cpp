@@ -274,6 +274,18 @@ bool Map::Load()
     PhysBody* c21 = app->physics->CreateRectangle(23 * 146, 1 * 23 + 704 + 32 - 275, 23 * 8, 8 * 23, STATIC);
     c21->ctype = ColliderType::PLATFORM;
 
+    //plataforma 19 dead
+    PhysBody* c22 = app->physics->CreateRectangle(23 * 75, 25 * 23 + 12, 23 * 155, 1 * 23, STATIC);
+    c22->ctype = ColliderType::PLATFORM;
+
+    //plataforma 20 wall
+    PhysBody* c23 = app->physics->CreateRectangle(-12, 12 * 23 + 12, 23 * 1, 25 * 23, STATIC);
+    c23->ctype = ColliderType::PLATFORM;
+
+    //plataforma 20 wall
+    PhysBody* c24 = app->physics->CreateRectangle(150 * 23 + 12, 12 * 23 + 12, 23 * 1, 25 * 23, STATIC);
+    c24->ctype = ColliderType::PLATFORM;
+
     if(ret == true)
     {
         // L04: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
