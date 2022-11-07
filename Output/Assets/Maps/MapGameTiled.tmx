@@ -3798,7 +3798,7 @@
  </layer>
  <layer id="12" name="Fondo 24" width="150" height="25">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -7555,7 +7555,7 @@
  </layer>
  <layer id="11" name="Fondo 2" width="150" height="25">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -11312,7 +11312,7 @@
  </layer>
  <layer id="8" name="Fondo 1" width="150" height="25">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -26340,7 +26340,7 @@
  </layer>
  <layer id="9" name="Collisions" width="150" height="25" visible="0" opacity="0.5">
   <properties>
-   <property name="Draw" type="bool" value="true"/>
+   <property name="Draw" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>

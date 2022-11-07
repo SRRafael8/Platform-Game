@@ -64,7 +64,7 @@ bool Player::Update()
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time>0) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0) {
 		vel = b2Vec2(0, +2*GRAVITY_Y);
 		time--;
 	}
@@ -75,7 +75,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
 		
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time > 0) {
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(-speed, +2*GRAVITY_Y);
 			
 			time--;
@@ -88,7 +88,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
 		
-		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time > 0) {
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(speed, +2*GRAVITY_Y);
 			time--;
 			
@@ -99,7 +99,7 @@ bool Player::Update()
 		
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
 		time = 0;
 	}
 
