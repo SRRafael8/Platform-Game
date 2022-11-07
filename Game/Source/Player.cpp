@@ -74,18 +74,29 @@ bool Player::Update()
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		vel = b2Vec2(-speed, -GRAVITY_Y);
+		
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(-speed, +2*GRAVITY_Y);
+			
 			time--;
+		}
+		if (position.x > 23 * 5 && position.x < 107 * 23) {
+			app->render->camera.x = -position.x + 100;
 		}
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		vel = b2Vec2(speed, -GRAVITY_Y);
+		
 		if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(speed, +2*GRAVITY_Y);
 			time--;
+			
 		}
+		if (position.x > 23 * 5 && position.x < 107 * 23) {
+			app->render->camera.x = -position.x +100;
+		}
+		
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_UP) {
@@ -130,9 +141,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::WIN:
 			LOG("Collision WIN");
+			//PASAMOS A PANTALLA GANADORA
 			break;
 		case ColliderType::LOSE:
 			LOG("Collision LOSE");
+			//PASAMOS A PANTALLA PERDEDORA
+			
 			break;
 	}
 	
