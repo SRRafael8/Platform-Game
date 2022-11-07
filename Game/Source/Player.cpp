@@ -39,7 +39,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x-50, position.y-276, 16, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x-50, position.y-276, 14, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this; 
@@ -109,7 +109,7 @@ bool Player::Update()
 
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 15;
-	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 13;
+	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
 
 	app->render->DrawTexture(texture, position.x , position.y);
 
