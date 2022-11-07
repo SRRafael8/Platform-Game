@@ -128,6 +128,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
 			break;
+		case ColliderType::WIN:
+			LOG("Collision WIN");
+			break;
+		case ColliderType::LOSE:
+			LOG("Collision LOSE");
+			break;
 	}
 	
 

@@ -276,7 +276,7 @@ bool Map::Load()
 
     //plataforma 19 dead
     PhysBody* c22 = app->physics->CreateRectangle(23 * 75, 25 * 23 + 12, 23 * 155, 1 * 23, STATIC);
-    c22->ctype = ColliderType::PLATFORM;
+    c22->ctype = ColliderType::LOSE;
 
     //plataforma 20 wall
     PhysBody* c23 = app->physics->CreateRectangle(-12, 12 * 23 + 12, 23 * 1, 25 * 23, STATIC);
@@ -284,7 +284,7 @@ bool Map::Load()
 
     //plataforma 20 wall
     PhysBody* c24 = app->physics->CreateRectangle(150 * 23 + 12, 12 * 23 + 12, 23 * 1, 25 * 23, STATIC);
-    c24->ctype = ColliderType::PLATFORM;
+    c24->ctype = ColliderType::WIN;
 
     if(ret == true)
     {
