@@ -67,9 +67,11 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0) {
 		vel = b2Vec2(0, +2*GRAVITY_Y);
 		time--;
+		//Animacion saltar normal
 	}
 	else {
 		b2Vec2(0, -GRAVITY_Y);
+		//Animacion Idle
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
@@ -77,12 +79,13 @@ bool Player::Update()
 		
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(-speed, +2*GRAVITY_Y);
-			
+			//Animacion saltar izquierda
 			time--;
 		}
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
 			app->render->camera.x = -position.x + 100;
 		}
+		//Animacion caminar izquierda
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
@@ -91,12 +94,12 @@ bool Player::Update()
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(speed, +2*GRAVITY_Y);
 			time--;
-			
+			//Animacion saltar derecha
 		}
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
 			app->render->camera.x = -position.x +100;
 		}
-		
+		//Animacion caminar derecha
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
