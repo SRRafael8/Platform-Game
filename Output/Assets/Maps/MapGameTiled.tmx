@@ -33,6 +33,9 @@
  <tileset firstgid="325" name="VermellVerd" tilewidth="23" tileheight="23" tilecount="2" columns="2">
   <image source="VermellVerd.png" width="46" height="23"/>
  </tileset>
+ <tileset firstgid="327" name="Spikes" tilewidth="25" tileheight="9" tilecount="1" columns="1">
+  <image source="Spikes.png" width="25" height="9"/>
+ </tileset>
  <imagelayer id="13" name="Image Layer 1" offsetx="1" offsety="0" repeatx="1">
   <image source="FONS 1.png" width="1450" height="575"/>
   <properties>
@@ -20987,7 +20990,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="327"/>
    <tile/>
    <tile/>
    <tile/>
@@ -21480,7 +21483,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="327"/>
    <tile/>
    <tile/>
    <tile/>
@@ -21859,7 +21862,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="327"/>
    <tile/>
    <tile/>
    <tile/>
@@ -22249,7 +22252,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
+   <tile gid="327"/>
    <tile/>
    <tile/>
    <tile/>
