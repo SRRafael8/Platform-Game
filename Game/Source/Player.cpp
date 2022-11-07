@@ -12,6 +12,16 @@
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
+
+	//idle Animation
+	idleanim.PushBack({ 0,0,56,56 });
+	idleanim.PushBack({ 57,0,56,56 });
+	idleanim.PushBack({ 113,0,56,56 });
+	idleanim.PushBack({ 169,0,56,56 });
+	idleanim.PushBack({ 225,0,56,+56 });
+	idleanim.PushBack({ 281,0,56,56 });
+	idleanim.loop = true;
+	idleanim.speedx = 0.08f;
 }
 
 Player::~Player() {
@@ -23,6 +33,7 @@ bool Player::Awake() {
 	//L02: DONE 1: Initialize Player parameters
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
+	texturePath = "Assets/Textures/Player0.png";
 
 	//L02: DONE 5: Get Player parameters from XML
 	position.x = parameters.attribute("x").as_int();
@@ -49,6 +60,8 @@ bool Player::Start() {
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+
+	currentAnimation = &idleanim;
 
 	return true;
 }
@@ -115,6 +128,8 @@ bool Player::Update()
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
 
 	app->render->DrawTexture(texture, position.x , position.y);
+	currentAnimation->Update();
+
 
 	return true;
 }
