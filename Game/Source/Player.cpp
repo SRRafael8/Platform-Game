@@ -51,8 +51,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	jumpingesquerra.loop = true;
 	jumpingesquerra.speedx = 0.1f;
 
-	//mortïsssssimo bb
-	
+	//mortïsssssimo
 	for (int i = 2; i > 0; i--) {
 		muertesita.PushBack({ (i * 56), 57 * 6, 56, 56 });
 	}
