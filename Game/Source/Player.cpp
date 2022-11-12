@@ -14,14 +14,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	name.Create("Player");
 
 	//idle Animation
-	idleanim.PushBack({ 0,0,56,56 });
-	idleanim.PushBack({ 57,0,56,56 });
-	idleanim.PushBack({ 113,0,56,56 });
-	idleanim.PushBack({ 169,0,56,56 });
-	idleanim.PushBack({ 225,0,56,+56 });
-	idleanim.PushBack({ 281,0,56,56 });
+	for (int i = 0; i < 6; i++) {
+		idleanim.PushBack({(i * 56), 0, 56, 56 });
+	}
 	idleanim.loop = true;
-	idleanim.speedx = 0.08f;
+	idleanim.speedx = 0.1f;
+
+
 }
 
 Player::~Player() {
@@ -142,8 +141,9 @@ bool Player::Update()
 	//Update player position in pixels
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 15;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
-
-	app->render->DrawTexture(texture, position.x , position.y);
+	SDL_Rect rect = currentAnimation->GetCurrentFrame();
+	app->render->DrawTexture(texture, position.x - 12, position.y - 23, &rect);
+	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
 
 
