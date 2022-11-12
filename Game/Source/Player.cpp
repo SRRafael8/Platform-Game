@@ -130,7 +130,10 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
 		time = 0;
 	}
-
+	if(position.x > 133 * 23 && wincondition == false && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE){
+		app->audio->PlayFx(winsound);
+		wincondition = true;
+	}
 
 	//Set the velocity of the pbody of the player
 	pbody->body->SetLinearVelocity(vel);

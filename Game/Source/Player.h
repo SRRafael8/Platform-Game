@@ -48,6 +48,7 @@ private:
 	int jumpsound;
 	int runsound;
 	int time = 20;
+	bool wincondition = false;
 	
 
 };
