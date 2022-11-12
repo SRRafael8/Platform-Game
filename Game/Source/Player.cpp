@@ -98,9 +98,10 @@ bool Player::Update()
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(-speed, +2*GRAVITY_Y);
 			//Animacion saltar izquierda
+			app->audio->PlayFx(jumpsound);
 			time--;
 		}
-		else if (position.x < 111 * 23) {
+		else if (position.x < 133 * 23) {
 			app->audio->PlayFx(runsound);
 		}
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
@@ -118,7 +119,7 @@ bool Player::Update()
 			app->audio->PlayFx(jumpsound);
 			//Animacion saltar derecha
 		}
-		else {
+		else if(position.x < 133 * 23) {
 			app->audio->PlayFx(runsound);
 		}
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
