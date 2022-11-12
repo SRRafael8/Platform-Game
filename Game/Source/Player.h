@@ -43,6 +43,10 @@ private:
 	PhysBody* pbody;
 
 	int pickCoinFxId;
+	int winsound;
+	int deathsound;
+	int jumpsound;
+	int runsound;
 	int time = 20;
 	
 

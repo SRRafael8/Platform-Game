@@ -60,6 +60,10 @@ bool Player::Start() {
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
+	runsound = app->audio->LoadFx("Assets/Audio/Fx/grassrunsupershort.wav");
+	deathsound = app->audio->LoadFx("Assets/Audio/Fx/Deathsound.wav");
+	winsound = app->audio->LoadFx("Assets/Audio/Fx/Winsound.wav");
+	jumpsound = app->audio->LoadFx("Assets/Audio/Fx/jumpyjump.wav");
 
 	currentAnimation = &idleanim;
 
@@ -80,6 +84,7 @@ bool Player::Update()
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0) {
 		vel = b2Vec2(0, +2*GRAVITY_Y);
 		time--;
+		app->audio->PlayFx(jumpsound);
 		//Animacion saltar normal
 	}
 	else {
@@ -95,6 +100,9 @@ bool Player::Update()
 			//Animacion saltar izquierda
 			time--;
 		}
+		else if (position.x < 111 * 23) {
+			app->audio->PlayFx(runsound);
+		}
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
 			app->render->camera.x = -position.x + 100;
 		}
@@ -107,7 +115,11 @@ bool Player::Update()
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
 			vel = b2Vec2(speed, +2*GRAVITY_Y);
 			time--;
+			app->audio->PlayFx(jumpsound);
 			//Animacion saltar derecha
+		}
+		else {
+			app->audio->PlayFx(runsound);
 		}
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
 			app->render->camera.x = -position.x +100;
@@ -159,10 +171,12 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::WIN:
 			LOG("Collision WIN");
+			app->audio->PlayFx(winsound);
 			//PASAMOS A PANTALLA GANADORA
 			break;
 		case ColliderType::LOSE:
 			LOG("Collision LOSE");
+			app->audio->PlayFx(deathsound);
 			//PASAMOS A PANTALLA PERDEDORA
 			
 			break;
