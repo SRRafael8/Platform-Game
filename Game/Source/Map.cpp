@@ -286,6 +286,20 @@ bool Map::Load()
     PhysBody* c24 = app->physics->CreateRectangle(150 * 23 + 12, 12 * 23 + 12, 23 * 1, 25 * 23, STATIC);
     c24->ctype = ColliderType::WIN;
 
+    //spikes
+    PhysBody* c25 = app->physics->CreateRectangle(518, 480, 15, 10, STATIC);
+    c25->ctype = ColliderType::LOSE;
+    PhysBody* c26 = app->physics->CreateRectangle(772, 480, 15, 10, STATIC);
+    c26->ctype = ColliderType::LOSE;
+    PhysBody* c27 = app->physics->CreateRectangle(1553, 502, 15, 10, STATIC);
+    c27->ctype = ColliderType::LOSE;
+    PhysBody* c28 = app->physics->CreateRectangle(2336, 411, 15, 10, STATIC);
+    c28->ctype = ColliderType::LOSE;
+    PhysBody* c29 = app->physics->CreateRectangle(2356, 411, 20, 10, STATIC);
+    c29->ctype = ColliderType::LOSE;
+    PhysBody* c30 = app->physics->CreateRectangle(2772, 525, 15, 10, STATIC);
+    c30->ctype = ColliderType::LOSE;
+
     if(ret == true)
     {
         // L04: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
