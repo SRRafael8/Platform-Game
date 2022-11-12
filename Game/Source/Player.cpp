@@ -181,7 +181,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LOG("Collision LOSE");
 			app->audio->PlayFx(deathsound);
 			//PASAMOS A PANTALLA PERDEDORA
-			
+			losecondition = true;
 			break;
 	}
 	
