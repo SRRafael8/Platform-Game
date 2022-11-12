@@ -32,6 +32,11 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	Animation idleanim;
+	Animation rightwalk;
+	Animation leftwalk;
+	Animation jumping;
+	Animation dying;
+	Animation atacacion;
 
 private:
 

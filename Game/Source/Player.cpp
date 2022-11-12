@@ -20,6 +20,26 @@ Player::Player() : Entity(EntityType::PLAYER)
 	idleanim.loop = true;
 	idleanim.speedx = 0.1f;
 
+	//Walking dreta
+	for (int i = 0; i < 8; i++) {
+		rightwalk.PushBack({ (i * 56), 57 + 57, 56, 56 });
+	}
+	rightwalk.loop = true;
+	rightwalk.speedx = 0.1f;
+
+	//atacacion sin moricion
+	for (int i = 0; i < 6; i++) {
+		atacacion.PushBack({ (i * 56), 57, 56, 56 });
+	}
+	atacacion.loop = false;
+	atacacion.speedx = 0.1f;
+
+	//Walking esquerra
+	for (int i = 6; i < 6; i++) {
+		leftwalk.PushBack({ (i * 56), 57 + 57, 56, 56 });
+	}
+	leftwalk.loop = true;
+	rightwalk.speedx = 0.1f;
 
 }
 
@@ -88,7 +108,7 @@ bool Player::Update()
 	}
 	else {
 		b2Vec2(0, -GRAVITY_Y);
-		//Animacion Idle
+		currentAnimation = &idleanim;
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
@@ -124,7 +144,7 @@ bool Player::Update()
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
 			app->render->camera.x = -position.x +100;
 		}
-		//Animacion caminar derecha
+		currentAnimation = &rightwalk;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP) {
@@ -142,7 +162,7 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 15;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x - 12, position.y - 23, &rect);
+	app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);
 	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
 
