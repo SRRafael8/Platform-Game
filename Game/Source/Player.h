@@ -34,8 +34,9 @@ public:
 	Animation idleanim;
 	Animation rightwalk;
 	Animation leftwalk;
-	Animation jumping;
-	Animation dying;
+	Animation jumpingdreta;
+	Animation jumpingesquerra;
+	Animation muertesita;
 	Animation atacacion;
 
 private:
