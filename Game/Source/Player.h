@@ -59,7 +59,7 @@ private:
 	bool wincondition = false;
 	bool losecondition = false;
 	bool ultimatelosecondition = false;
-	int godmode = 1;
+	bool godmode = false;
 	
 	
 	float yVel = 0;
