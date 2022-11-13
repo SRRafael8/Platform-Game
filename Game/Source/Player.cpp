@@ -42,13 +42,13 @@ Player::Player() : Entity(EntityType::PLAYER)
 	leftwalk.speedx = 0.1f;
 
 	//saltimbanquis dretísssssssima
-	for (int i = 7; i > 1; i--) {
-		jumpingesquerra.PushBack({ 900 - (i * 56), 57 * 3, 56, 56 });
+	for (int i = 7; i > 0; i--) {
+		jumpingesquerra.PushBack({(i * 56), 57 * 3, 56, 56 });
 	}
-	for (int i = 7; i > 1; i--) {
-		jumpingesquerra.PushBack({ 900 - (i * 56), 57 * 4, 56, 56 });
-	}
-	jumpingesquerra.loop = true;
+	/*jumpingesquerra.PushBack({ (5 * 56), 57 * 4, 56, 56 });
+	jumpingesquerra.PushBack({ (6 * 56), 57 * 4, 56, 56 });
+	jumpingesquerra.PushBack({ (7 * 56), 57 * 4, 56, 56 });*/
+	jumpingesquerra.loop = false;
 	jumpingesquerra.speedx = 0.1f;
 
 	//mortïsssssimo
@@ -128,10 +128,11 @@ bool Player::Update()
 		if (grounded) {
 			yVel = 0.85 * GRAVITY_Y;
 			grounded = false;
+			currentAnimation = &jumpingesquerra;
 		}
 		//Animacion saltar normal
 	}
-	else if(losecondition == false) {
+	else if(losecondition == false && grounded == true) {
 		b2Vec2(0, -GRAVITY_Y);
 		currentAnimation = &idleanim;
 	}
@@ -230,6 +231,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			time = 20;
 			yVel = 3;
 			grounded = true;
+			currentAnimation->Reset();
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
