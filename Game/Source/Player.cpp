@@ -121,7 +121,7 @@ bool Player::Update()
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0 && losecondition == false) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0 && ultimatelosecondition == false) {
 		vel = b2Vec2(0, +2*GRAVITY_Y);
 		time--;
 		app->audio->PlayFx(jumpsound);
@@ -130,14 +130,13 @@ bool Player::Update()
 			grounded = false;
 			currentAnimation = &jumpingesquerra;
 		}
-		//Animacion saltar normal
 	}
-	else if(losecondition == false && grounded == true) {
+	else if(ultimatelosecondition == false && grounded == true) {
 		b2Vec2(0, -GRAVITY_Y);
 		currentAnimation = &idleanim;
 	}
 		
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && losecondition == false) {
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && ultimatelosecondition == false) {
 		currentspeed = -speed;
 		
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
@@ -154,11 +153,10 @@ bool Player::Update()
 		if (position.x > 23 * 5 && position.x < 107 * 23) {
 			app->render->camera.x = -position.x + 100;
 		}
-		//Animacion caminar izquierda
 		currentAnimation = &leftwalk;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && losecondition == false) {
+	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && ultimatelosecondition == false) {
 		currentspeed = speed;
 		
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
@@ -168,7 +166,6 @@ bool Player::Update()
 			}
 			time--;
 			app->audio->PlayFx(jumpsound);
-			//Animacion saltar derecha
 		}
 		else if(position.x < 133 * 23) {
 			app->audio->PlayFx(runsound);
@@ -182,16 +179,23 @@ bool Player::Update()
 		yVel -= GRAVITY_Y * 0.02;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && losecondition == false) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && ultimatelosecondition == false) {
 		time = 0;
 	}
-	if(position.x > 133 * 23 && wincondition == false && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && losecondition == false){
+	if(position.x > 133 * 23 && wincondition == false && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && ultimatelosecondition == false){
 		app->audio->PlayFx(winsound);
 		wincondition = true;
 	}
-	if (losecondition == true) {
+	if (losecondition == true && godmode == 1) {
+		ultimatelosecondition = true;
 		currentAnimation = &muertesita;
+		app->audio->PlayFx(deathsound);
 	}
+
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
+		godmode * -1;
+	}
+
 
 	//Set the velocity of the pbody of the player
 	vel = b2Vec2(currentspeed, yVel);
@@ -243,9 +247,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			break;
 		case ColliderType::LOSE:
 			LOG("Collision LOSE");
-			app->audio->PlayFx(deathsound);
 			//PASAMOS A PANTALLA PERDEDORA
 			losecondition = true;
+			
+
 			break;
 		default: grounded = false;
 			

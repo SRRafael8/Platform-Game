@@ -58,6 +58,8 @@ private:
 	int time = 20;
 	bool wincondition = false;
 	bool losecondition = false;
+	bool ultimatelosecondition = false;
+	int godmode = 1;
 	
 	
 	float yVel = 0;
