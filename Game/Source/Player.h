@@ -46,6 +46,10 @@ private:
 	//L02: DONE 1: Declare player parameters
 	SDL_Texture* texture;
 	const char* texturePath;
+	SDL_Texture* texturescene3;
+	SDL_Texture* texturescene4;
+	const char* texturedeath;
+	const char* texturewin;
 	
 
 	// L07 DONE 5: Add physics to the player - declare a Physics body
@@ -63,6 +67,8 @@ private:
 	int godmode = 1;
 	bool introactiva = true;
 	bool introactiva2 = false;
+	bool lose=false;
+	bool ganar=false;
 
 	float yVel = 0;
 

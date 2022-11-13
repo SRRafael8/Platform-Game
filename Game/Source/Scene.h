@@ -44,11 +44,16 @@ private:
 	SDL_Texture* img;
 	SDL_Texture* texturescene;
 	SDL_Texture* texturescene2;
+	SDL_Texture* texturescreen3;
+	SDL_Texture* texturescreen4;
 	const char* textureintro;
 	const char* texturelobby;
+	const char* texturedeath;
+	const char* texturewin;
 	bool introactiva = true;
 	bool introactiva2 = true;
 	int timer = 200;
+
 
 };
 

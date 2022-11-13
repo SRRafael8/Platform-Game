@@ -74,6 +74,8 @@ bool Player::Awake() {
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
 	texturePath = "Assets/Textures/Player0.png";
+	texturedeath= "Assets/Textures/deathscreen.png.png";
+	texturewin= "Assets/Textures/winscreen.png";
 	
 
 	//L02: DONE 5: Get Player parameters from XML
@@ -88,6 +90,8 @@ bool Player::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
+	texturescene3 = app->tex->Load(texturewin);
+	texturescene4 = app->tex->Load(texturedeath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x-50, position.y-276, 12, bodyType::DYNAMIC);
@@ -216,6 +220,13 @@ bool Player::Update()
 	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
 
+	if (ganar == true) {
+		app->render->DrawTexture(texturescene3, 0, 0);
+	}
+
+	if (lose == true) {
+		app->render->DrawTexture(texturescene4, 0, 0);
+	}
 
 	return true;
 }
@@ -251,12 +262,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			LOG("Collision WIN");
 			app->audio->PlayFx(winsound);
 			//PASAMOS A PANTALLA GANADORA
+			ganar = true;
 			break;
 		case ColliderType::LOSE:
 			LOG("Collision LOSE");
 			//PASAMOS A PANTALLA PERDEDORA
 			losecondition = true;
-			
+			lose = true;
 
 			break;
 		default: grounded = false;

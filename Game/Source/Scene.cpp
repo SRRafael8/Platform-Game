@@ -40,6 +40,8 @@ bool Scene::Awake(pugi::xml_node& config)
 
 	textureintro = "Assets/Scenes/startscene.png";
 	texturelobby = "Assets/Scenes/lobbyscreen.png";
+	texturedeath = "Assets/Scenes/deathscreen.png";
+	texturewin = "Assets/Scenes/winscreen.png";
 
 	return ret;
 
@@ -97,7 +99,7 @@ bool Scene::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 		app->render->camera.x -= 20;
-
+	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
 
 	// Draw map
@@ -115,6 +117,7 @@ bool Scene::Update(float dt)
 		SDL_DestroyTexture(texturescene);
 		SDL_DestroyTexture(texturescene2);
 	}
+
 
 	return true;
 }
