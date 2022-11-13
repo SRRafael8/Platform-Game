@@ -121,11 +121,35 @@ bool Player::Update()
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
+<<<<<<< HEAD
 	if (introactiva == false) {
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0 && ultimatelosecondition == false) {
 			vel = b2Vec2(0, +2 * GRAVITY_Y);
 			time--;
 			app->audio->PlayFx(jumpsound);
+=======
+	
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0 && ultimatelosecondition == false && godmode == false) {
+		vel = b2Vec2(0, +2*GRAVITY_Y);
+		time--;
+		app->audio->PlayFx(jumpsound);
+		if (grounded) {
+			yVel = 0.85 * GRAVITY_Y;
+			grounded = false;
+			currentAnimation = &jumpingesquerra;
+		}
+	}
+	else if(ultimatelosecondition == false && grounded == true) {
+		if (godmode == false) {b2Vec2(0, -GRAVITY_Y);}
+		if (godmode == true) { b2Vec2(0, 0);}
+		currentAnimation = &idleanim;
+	}
+		
+	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && ultimatelosecondition == false) {
+		currentspeed = -speed;
+		
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0 && godmode == false) {
+>>>>>>> ab2899b94690731979c9ba0ae2e43517961e3341
 			if (grounded) {
 				yVel = 0.85 * GRAVITY_Y;
 				grounded = false;
@@ -177,7 +201,7 @@ bool Player::Update()
 			currentAnimation = &rightwalk;
 		}
 	}
-	if (!grounded) {
+	if (!grounded && godmode == false) {
 		yVel -= GRAVITY_Y * 0.02;
 	}
 
@@ -188,14 +212,18 @@ bool Player::Update()
 		app->audio->PlayFx(winsound);
 		wincondition = true;
 	}
-	if (losecondition == true && godmode == 1) {
+	if (losecondition == true && godmode == false) {
 		ultimatelosecondition = true;
 		currentAnimation = &muertesita;
 		app->audio->PlayFx(deathsound);
 	}
+	if (losecondition == true && godmode == true) {
+		losecondition = false;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
-		godmode * -1;
+		if (godmode == false) { godmode = true; }
+		if (godmode == true) { godmode = false; }
 	}
 
 
