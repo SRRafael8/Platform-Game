@@ -221,11 +221,19 @@ bool Player::Update()
 	currentAnimation->Update();
 
 	if (ganar == true) {
-		app->render->DrawTexture(texturescene3, 0, 0);
+		app->render->DrawTexture(texturescene3, 2360, 0);
 	}
 
 	if (lose == true) {
-		app->render->DrawTexture(texturescene4, 0, 0);
+		if (position.x < 23 * 5) {
+			app->render->DrawTexture(texturescene4, 0, 0);
+		}
+		if (position.x > 23 * 5 && position.x < 107 * 23) {
+			app->render->DrawTexture(texturescene4, position.x - 106, 0);
+		}
+		if (position.x > 107 * 23) {
+			app->render->DrawTexture(texturescene4, 2360, 0);
+		}
 	}
 
 	return true;
