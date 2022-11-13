@@ -39,6 +39,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	player->parameters = config.child("player");
 
 	textureintro = "Assets/Scenes/startscene.png";
+	texturelobby = "Assets/Scenes/lobbyscreen.png";
 
 	return ret;
 
@@ -50,6 +51,7 @@ bool Scene::Start()
 	//img = app->tex->Load("Assets/Textures/test.png");
 	app->audio->PlayMusic("Assets/Audio/Music/medievalsong.mp3");
 	texturescene = app->tex->Load(textureintro);
+	texturescene2 = app->tex->Load(texturelobby);
 	// L03: DONE: Load map
 	app->map->Load();
 
@@ -101,14 +103,19 @@ bool Scene::Update(float dt)
 	// Draw map
 	app->map->Draw();
 
-	if (introactiva = true) {
+	if (introactiva == true) {
 		app->render->DrawTexture(texturescene, 0, 0);
+		timer--;
+	}
+	if (timer == 0) {
+		introactiva = false;
+		app->render->DrawTexture(texturescene2, 0, 0);
 	}
 	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
 		SDL_DestroyTexture(texturescene);
-		app->render->DrawTexture(texturescene, 0, 0);
+		SDL_DestroyTexture(texturescene2);
 	}
-	
+
 	return true;
 }
 

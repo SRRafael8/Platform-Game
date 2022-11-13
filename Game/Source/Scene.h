@@ -48,6 +48,7 @@ private:
 	const char* texturelobby;
 	bool introactiva = true;
 	bool introactiva2 = true;
+	int timer = 200;
 
 };
 
