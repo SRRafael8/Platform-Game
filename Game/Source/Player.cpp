@@ -74,8 +74,8 @@ bool Player::Awake() {
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
 	texturePath = "Assets/Textures/Player0.png";
-	texturedeath= "Assets/Textures/deathscreen.png.png";
-	texturewin= "Assets/Textures/winscreen.png";
+	texturedeath= "Assets/Scenes/deathscreen.png";
+	texturewin= "Assets/Scenes/winscreen.png";
 	
 
 	//L02: DONE 5: Get Player parameters from XML
