@@ -74,6 +74,7 @@ bool Player::Awake() {
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
 	texturePath = "Assets/Textures/Player0.png";
+	
 
 	//L02: DONE 5: Get Player parameters from XML
 	position.x = parameters.attribute("x").as_int();
@@ -89,7 +90,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x-50, position.y-276, 14, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x-50, position.y-276, 12, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this; 
@@ -120,60 +121,61 @@ bool Player::Update()
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
-	
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time>0 && ultimatelosecondition == false) {
-		vel = b2Vec2(0, +2*GRAVITY_Y);
-		time--;
-		app->audio->PlayFx(jumpsound);
-		if (grounded) {
-			yVel = 0.85 * GRAVITY_Y;
-			grounded = false;
-			currentAnimation = &jumpingesquerra;
-		}
-	}
-	else if(ultimatelosecondition == false && grounded == true) {
-		b2Vec2(0, -GRAVITY_Y);
-		currentAnimation = &idleanim;
-	}
-		
-	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && ultimatelosecondition == false) {
-		currentspeed = -speed;
-		
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
+	if (introactiva == false) {
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0 && ultimatelosecondition == false) {
+			vel = b2Vec2(0, +2 * GRAVITY_Y);
+			time--;
+			app->audio->PlayFx(jumpsound);
 			if (grounded) {
 				yVel = 0.85 * GRAVITY_Y;
 				grounded = false;
+				currentAnimation = &jumpingesquerra;
 			}
-			app->audio->PlayFx(jumpsound);
-			time--;
 		}
-		else if (position.x < 133 * 23) {
-			app->audio->PlayFx(runsound);
+		else if (ultimatelosecondition == false && grounded == true) {
+			b2Vec2(0, -GRAVITY_Y);
+			currentAnimation = &idleanim;
 		}
-		if (position.x > 23 * 5 && position.x < 107 * 23) {
-			app->render->camera.x = -position.x + 100;
-		}
-		currentAnimation = &leftwalk;
-	}
 
-	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && ultimatelosecondition == false) {
-		currentspeed = speed;
-		
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
-			if (grounded) {
-				yVel = 0.85* GRAVITY_Y;
-				grounded = false;
+		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && ultimatelosecondition == false) {
+			currentspeed = -speed;
+
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
+				if (grounded) {
+					yVel = 0.85 * GRAVITY_Y;
+					grounded = false;
+				}
+				app->audio->PlayFx(jumpsound);
+				time--;
 			}
-			time--;
-			app->audio->PlayFx(jumpsound);
+			else if (position.x < 133 * 23) {
+				app->audio->PlayFx(runsound);
+			}
+			if (position.x > 23 * 5 && position.x < 107 * 23) {
+				app->render->camera.x = -position.x + 100;
+			}
+			currentAnimation = &leftwalk;
 		}
-		else if(position.x < 133 * 23) {
-			app->audio->PlayFx(runsound);
+
+		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && ultimatelosecondition == false) {
+			currentspeed = speed;
+
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
+				if (grounded) {
+					yVel = 0.85 * GRAVITY_Y;
+					grounded = false;
+				}
+				time--;
+				app->audio->PlayFx(jumpsound);
+			}
+			else if (position.x < 133 * 23) {
+				app->audio->PlayFx(runsound);
+			}
+			if (position.x > 23 * 5 && position.x < 107 * 23) {
+				app->render->camera.x = -position.x + 100;
+			}
+			currentAnimation = &rightwalk;
 		}
-		if (position.x > 23 * 5 && position.x < 107 * 23) {
-			app->render->camera.x = -position.x +100;
-		}
-		currentAnimation = &rightwalk;
 	}
 	if (!grounded) {
 		yVel -= GRAVITY_Y * 0.02;
@@ -205,7 +207,12 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 15;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+		introactiva = false;
+	}
+	if (introactiva == false) {
+		app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);
+	}
 	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
 

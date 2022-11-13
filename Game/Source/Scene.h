@@ -34,6 +34,7 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+
 public:
 
 	//L02: DONE 3: Declare a Player attribute 
@@ -41,6 +42,12 @@ public:
 
 private:
 	SDL_Texture* img;
+	SDL_Texture* texturescene;
+	SDL_Texture* texturescene2;
+	const char* textureintro;
+	const char* texturelobby;
+	bool introactiva = true;
+	bool introactiva2 = true;
 
 };
 

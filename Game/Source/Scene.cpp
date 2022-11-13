@@ -38,7 +38,10 @@ bool Scene::Awake(pugi::xml_node& config)
 	player = (Player*)app->entityManager->CreateEntity(EntityType::PLAYER);
 	player->parameters = config.child("player");
 
+	textureintro = "Assets/Scenes/startscene.png";
+
 	return ret;
+
 }
 
 // Called before the first frame
@@ -46,7 +49,7 @@ bool Scene::Start()
 {
 	//img = app->tex->Load("Assets/Textures/test.png");
 	app->audio->PlayMusic("Assets/Audio/Music/medievalsong.mp3");
-	
+	texturescene = app->tex->Load(textureintro);
 	// L03: DONE: Load map
 	app->map->Load();
 
@@ -98,8 +101,18 @@ bool Scene::Update(float dt)
 	// Draw map
 	app->map->Draw();
 
+	if (introactiva = true) {
+		app->render->DrawTexture(texturescene, 0, 0);
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+		SDL_DestroyTexture(texturescene);
+		app->render->DrawTexture(texturescene, 0, 0);
+	}
+	
 	return true;
 }
+
+
 
 // Called each loop iteration
 bool Scene::PostUpdate()
