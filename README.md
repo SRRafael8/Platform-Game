@@ -20,7 +20,7 @@ When you win/die, the game will ask you to press a key to close the game, do so.
  
 ## Developers
 
- - Rafael Esquis
+ - Rafael Esquius Pérez
  - Pau Garriga Brotons
 
 ## License
