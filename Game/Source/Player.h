@@ -60,16 +60,10 @@ private:
 	bool wincondition = false;
 	bool losecondition = false;
 	bool ultimatelosecondition = false;
-<<<<<<< HEAD
 	int godmode = 1;
 	bool introactiva = true;
 	bool introactiva2 = false;
 
-=======
-	bool godmode = false;
-	
-	
->>>>>>> ab2899b94690731979c9ba0ae2e43517961e3341
 	float yVel = 0;
 
 };
