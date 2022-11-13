@@ -1,26 +1,27 @@
-# {Project Name}
+# {Arthen}
 
 ## Description
 
-{project description}
+This game is a University project and was made to only have one level.
+Is a platform game that consists of arriving at the end of the map without falling off the cliffs or being pierced by the spikes.
+When you win/die, the game will ask you to press a key to close the game, do so.
 
-## Key Features
 
- - {Feature01}
- - {Feature02}
- - {Feature03}
- - {Feature04}
- 
 ## Controls
 
- - {ControlsScheme}
+ - A -> Move Left
+ - D -> Move Right
+ - SPACE -> Jump
 
+## Key Extras
+
+ - F9 -> Debug mode (Show collisions).
+ - F10 -> Godmode (not finished).
+ 
 ## Developers
 
- - {Dev01} - {Role(s)}
- - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - Rafael Esquis
+ - Pau Garriga Brotons
 
 ## License
 
