@@ -80,7 +80,6 @@ bool Player::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	
-
 	return true;
 }
 
@@ -115,7 +114,8 @@ bool Player::Update()
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
-	int speed = 5; 
+	int speed = 3; 
+	int currentspeed = 0;
 	
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
 
@@ -125,6 +125,10 @@ bool Player::Update()
 		vel = b2Vec2(0, +2*GRAVITY_Y);
 		time--;
 		app->audio->PlayFx(jumpsound);
+		if (grounded) {
+			yVel = 0.85 * GRAVITY_Y;
+			grounded = false;
+		}
 		//Animacion saltar normal
 	}
 	else if(losecondition == false) {
@@ -133,10 +137,13 @@ bool Player::Update()
 	}
 		
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && losecondition == false) {
-		vel = b2Vec2(-speed, -GRAVITY_Y);
+		currentspeed = -speed;
 		
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
-			vel = b2Vec2(-speed, +2*GRAVITY_Y);
+			if (grounded) {
+				yVel = 0.85 * GRAVITY_Y;
+				grounded = false;
+			}
 			app->audio->PlayFx(jumpsound);
 			time--;
 		}
@@ -151,10 +158,13 @@ bool Player::Update()
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && losecondition == false) {
-		vel = b2Vec2(speed, -GRAVITY_Y);
+		currentspeed = speed;
 		
 		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
-			vel = b2Vec2(speed, +2*GRAVITY_Y);
+			if (grounded) {
+				yVel = 0.85* GRAVITY_Y;
+				grounded = false;
+			}
 			time--;
 			app->audio->PlayFx(jumpsound);
 			//Animacion saltar derecha
@@ -166,6 +176,9 @@ bool Player::Update()
 			app->render->camera.x = -position.x +100;
 		}
 		currentAnimation = &rightwalk;
+	}
+	if (!grounded) {
+		yVel -= GRAVITY_Y * 0.02;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && losecondition == false) {
@@ -180,6 +193,7 @@ bool Player::Update()
 	}
 
 	//Set the velocity of the pbody of the player
+	vel = b2Vec2(currentspeed, yVel);
 	pbody->body->SetLinearVelocity(vel);
 
 	//Update player position in pixels
@@ -199,6 +213,7 @@ bool Player::CleanUp()
 	return true;
 }
 
+
 // L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
 void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 
@@ -213,6 +228,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");
 			time = 20;
+			yVel = 3;
+			grounded = true;
 			break;
 		case ColliderType::UNKNOWN:
 			LOG("Collision UNKNOWN");
@@ -228,6 +245,8 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			//PASAMOS A PANTALLA PERDEDORA
 			losecondition = true;
 			break;
+		default: grounded = false;
+			
 	}
 	
 

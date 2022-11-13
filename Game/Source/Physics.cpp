@@ -66,9 +66,9 @@ bool Physics::PreUpdate()
 			
 			if (pb1 && pb2 && pb1->listener)
 				pb1->listener->OnCollision(pb1, pb2);
+			
 		}
 	}
-
 	return ret;
 }
 
