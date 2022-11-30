@@ -18,6 +18,7 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class Enemy;
 //L07 DONE 2: Add Physics module
 class Physics;
 
