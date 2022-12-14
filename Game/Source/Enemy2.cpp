@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "Enemy2.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,20 +9,20 @@
 #include "Point.h"
 #include "Physics.h"
 
-Player::Player() : Entity(EntityType::PLAYER)
+Enemy2::Enemy2() : Entity(EntityType::ENEMY)
 {
-	name.Create("Player");
+	name.Create("Enemy2");
 
 	//idle Animation
-	for (int i = 0; i < 6; i++) {
-		idleanim.PushBack({(i * 56), 0, 56, 56 });
+	for (int i = 0; i < 8; i++) {
+		idleanim.PushBack({ (i * 150), 0, 25, 39 });
 	}
 	idleanim.loop = true;
 	idleanim.speedx = 0.1f;
 
 	//Walking dreta
 	for (int i = 0; i < 8; i++) {
-		rightwalk.PushBack({ (i * 56), 57 + 57, 56, 56 });
+		rightwalk.PushBack({ (i * 150), 0, 25, 39 });
 	}
 	rightwalk.loop = true;
 	rightwalk.speedx = 0.1f;
@@ -36,14 +36,14 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 	//Walking esquerra
 	for (int i = 7; i > 1; i--) {
-		leftwalk.PushBack({ 900 - (i * 56), 57 + 57, 56, 56 });
+		leftwalk.PushBack({ 2352 - (i * 150), 0, 25, 39 });
 	}
 	leftwalk.loop = true;
 	leftwalk.speedx = 0.1f;
 
 	//saltimbanquis dretísssssssima
 	for (int i = 7; i > 0; i--) {
-		jumpingesquerra.PushBack({(i * 56), 57 * 3, 56, 56 });
+		jumpingesquerra.PushBack({ (i * 56), 57 * 3, 56, 56 });
 	}
 	/*jumpingesquerra.PushBack({ (5 * 56), 57 * 4, 56, 56 });
 	jumpingesquerra.PushBack({ (6 * 56), 57 * 4, 56, 56 });
@@ -64,29 +64,29 @@ Player::Player() : Entity(EntityType::PLAYER)
 
 }
 
-Player::~Player() {
+Enemy2::~Enemy2() {
 
 }
 
-bool Player::Awake() {
+bool Enemy2::Awake() {
 
 	//L02: DONE 1: Initialize Player parameters
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
-	texturePath = "Assets/Textures/Player0.png";
-	texturedeath= "Assets/Scenes/deathscreen.png";
-	texturewin= "Assets/Scenes/winscreen.png";
-	
+	texturePath = "Assets/Textures/Eye.png";
+	texturedeath = "Assets/Scenes/deathscreen.png";
+	texturewin = "Assets/Scenes/winscreen.png";
+
 
 	//L02: DONE 5: Get Player parameters from XML
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
-	
+
 	return true;
 }
 
-bool Player::Start() {
+bool Enemy2::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
@@ -94,13 +94,13 @@ bool Player::Start() {
 	texturescene4 = app->tex->Load(texturedeath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x-50, position.y-276, 12, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 100, position.y - 276, 16, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
-	pbody->listener = this; 
-	
+	pbody->listener = this;
+
 	// L07 DONE 7: Assign collider type
-	pbody->ctype = ColliderType::PLAYER;
+	pbody->ctype = ColliderType::ENEMY;
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
@@ -114,19 +114,19 @@ bool Player::Start() {
 	return true;
 }
 
-bool Player::Update()
+bool Enemy2::Update()
 {
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
-	
-	int speed = 3; 
+
+	int speed = 1;
 	int currentspeed = 0;
-	
-	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y); 
+
+	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (introactiva == false) {
-		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0 && ultimatelosecondition == false) {
+		if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0 && ultimatelosecondition == false) {
 			vel = b2Vec2(0, +2 * GRAVITY_Y);
 			time--;
 			app->audio->PlayFx(jumpsound);
@@ -141,10 +141,10 @@ bool Player::Update()
 			currentAnimation = &idleanim;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT && ultimatelosecondition == false) {
+		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT && ultimatelosecondition == false) {
 			currentspeed = -speed;
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
+			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0) {
 				if (grounded) {
 					yVel = 0.85 * GRAVITY_Y;
 					grounded = false;
@@ -155,16 +155,16 @@ bool Player::Update()
 			else if (position.x < 133 * 23) {
 				app->audio->PlayFx(runsound);
 			}
-			if (position.x > 23 * 5 && position.x < 107 * 23) {
+			/*if (position.x > 23 * 5 && position.x < 107 * 23) {
 				app->render->camera.x = -position.x + 100;
-			}
+			}*/
 			currentAnimation = &leftwalk;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && ultimatelosecondition == false) {
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT && ultimatelosecondition == false) {
 			currentspeed = speed;
 
-			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_REPEAT && time > 0) {
+			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0) {
 				if (grounded) {
 					yVel = 0.85 * GRAVITY_Y;
 					grounded = false;
@@ -175,26 +175,20 @@ bool Player::Update()
 			else if (position.x < 133 * 23) {
 				app->audio->PlayFx(runsound);
 			}
-			if (position.x > 23 * 5 && position.x < 107 * 23) {
+			/*if (position.x > 23 * 5 && position.x < 107 * 23) {
 				app->render->camera.x = -position.x + 100;
-			}
+			}*/
 			currentAnimation = &rightwalk;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_K)==KEY_DOWN && ultimatelosecondition == false){
-			pbody->ctype = ColliderType::ATTACK;
-			grounded = false;
-			currentAnimation = &atacacion;
 		}
 	}
 	if (!grounded) {
 		yVel -= GRAVITY_Y * 0.02;
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_UP && ultimatelosecondition == false) {
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_UP && ultimatelosecondition == false) {
 		time = 0;
 	}
-	if(position.x > 133 * 23 && wincondition == false && app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_A) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_D) == KEY_IDLE && ultimatelosecondition == false){
+	if (position.x > 133 * 23 && wincondition == false && app->input->GetKey(SDL_SCANCODE_I) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_J) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_L) == KEY_IDLE && ultimatelosecondition == false) {
 		app->audio->PlayFx(winsound);
 		wincondition = true;
 	}
@@ -221,7 +215,7 @@ bool Player::Update()
 		introactiva = false;
 	}
 	if (introactiva == false) {
-		app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);
+		app->render->DrawTexture(texture, position.x, position.y - 9, &rect);
 	}
 	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
@@ -245,55 +239,38 @@ bool Player::Update()
 	return true;
 }
 
-bool Player::CleanUp()
+bool Enemy2::CleanUp()
 {
 	return true;
 }
 
 
 // L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
-void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Enemy2::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	// L07 DONE 7: Detect the type of collision
 
 	switch (physB->ctype)
 	{
-		case ColliderType::ITEM:
-			LOG("Collision ITEM");
-			app->audio->PlayFx(pickCoinFxId);
-			break;
-		case ColliderType::PLATFORM:
-			LOG("Collision PLATFORM");
-			time = 20;
-			yVel = 3;
-			grounded = true;
-			currentAnimation->Reset();
-			break;
-		case ColliderType::UNKNOWN:
-			LOG("Collision UNKNOWN");
-			break;
-		case ColliderType::WIN:
-			LOG("Collision WIN");
-			app->audio->PlayFx(winsound);
-			//PASAMOS A PANTALLA GANADORA
-			ganar = true;
-			break;
-		case ColliderType::LOSE:
-			LOG("Collision LOSE");
-			//PASAMOS A PANTALLA PERDEDORA
-			losecondition = true;
-			lose = true;
-			break;
-		case ColliderType::ENEMY:
-			LOG("Collision ENEMY");
-			losecondition = true;
-			lose = true;
-			break;
-
-		default: grounded = false;
-			
-	}
+	case ColliderType::ITEM:
+		LOG("Collision ITEM");
+		app->audio->PlayFx(pickCoinFxId);
+		break;
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		time = 20;
+		yVel = 3;
+		grounded = true;
+		currentAnimation->Reset();
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
 	
+	default: grounded = false;
+
+	}
+
 
 
 }

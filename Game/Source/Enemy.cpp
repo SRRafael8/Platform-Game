@@ -14,15 +14,15 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 	name.Create("Enemy");
 
 	//idle Animation
-	for (int i = 0; i < 6; i++) {
-		idleanim.PushBack({ (i * 56), 0, 56, 56 });
+	for (int i = 0; i < 4; i++) {
+		idleanim.PushBack({ (i * 150), 415, 25, 39 });
 	}
 	idleanim.loop = true;
 	idleanim.speedx = 0.1f;
 
 	//Walking dreta
 	for (int i = 0; i < 8; i++) {
-		rightwalk.PushBack({ (i * 56), 57 + 57, 56, 56 });
+		rightwalk.PushBack({ (i * 150), 0, 25, 39 });
 	}
 	rightwalk.loop = true;
 	rightwalk.speedx = 0.1f;
@@ -36,7 +36,7 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 
 	//Walking esquerra
 	for (int i = 7; i > 1; i--) {
-		leftwalk.PushBack({ 900 - (i * 56), 57 + 57, 56, 56 });
+		leftwalk.PushBack({ 2352 - (i * 150), 0, 25, 39 });
 	}
 	leftwalk.loop = true;
 	leftwalk.speedx = 0.1f;
@@ -73,7 +73,7 @@ bool Enemy::Awake() {
 	//L02: DONE 1: Initialize Player parameters
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
-	texturePath = "Assets/Textures/Player0.png";
+	texturePath = "Assets/Textures/Mushroom.png";
 	texturedeath = "Assets/Scenes/deathscreen.png";
 	texturewin = "Assets/Scenes/winscreen.png";
 
@@ -94,7 +94,7 @@ bool Enemy::Start() {
 	texturescene4 = app->tex->Load(texturedeath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x, position.y - 276, 12, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 16, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -119,7 +119,7 @@ bool Enemy::Update()
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 
-	int speed = 3;
+	int speed = 1;
 	int currentspeed = 0;
 
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
@@ -215,7 +215,7 @@ bool Enemy::Update()
 		introactiva = false;
 	}
 	if (introactiva == false) {
-		app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);
+		app->render->DrawTexture(texture, position.x, position.y - 9, &rect);
 	}
 	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
@@ -265,19 +265,6 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
-		break;
-	case ColliderType::WIN:
-		LOG("Collision WIN");
-		app->audio->PlayFx(winsound);
-		//PASAMOS A PANTALLA GANADORA
-		ganar = true;
-		break;
-	case ColliderType::LOSE:
-		LOG("Collision LOSE");
-		//PASAMOS A PANTALLA PERDEDORA
-		losecondition = true;
-		lose = true;
-
 		break;
 	default: grounded = false;
 
