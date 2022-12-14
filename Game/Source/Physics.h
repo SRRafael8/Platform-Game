@@ -30,7 +30,8 @@ enum class ColliderType {
 	UNKNOWN,
 	WIN,
 	LOSE,
-	ENEMY
+	ENEMY,
+	ATTACK
 	// ..
 };
 

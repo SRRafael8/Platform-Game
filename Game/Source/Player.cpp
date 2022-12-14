@@ -118,7 +118,7 @@ bool Player::Update()
 {
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
-
+	
 	int speed = 3; 
 	int currentspeed = 0;
 	
@@ -179,6 +179,12 @@ bool Player::Update()
 				app->render->camera.x = -position.x + 100;
 			}
 			currentAnimation = &rightwalk;
+		}
+
+		if (app->input->GetKey(SDL_SCANCODE_K)==KEY_DOWN && ultimatelosecondition == false){
+			pbody->ctype = ColliderType::ATTACK;
+			grounded = false;
+			currentAnimation = &atacacion;
 		}
 	}
 	if (!grounded) {
