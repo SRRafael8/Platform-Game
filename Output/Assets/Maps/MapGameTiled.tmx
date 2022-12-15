@@ -51,7 +51,6 @@
  <layer id="14" name="ARBOL1" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
-   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile gid="319"/>
@@ -28910,6 +28909,24 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
    <tile/>
    <tile/>
    <tile/>
@@ -29042,6 +29059,24 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
    <tile/>
    <tile/>
    <tile/>
@@ -29174,6 +29209,24 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
    <tile/>
    <tile/>
    <tile/>
@@ -29306,60 +29359,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="317"/>
    <tile gid="318"/>
    <tile gid="318"/>
    <tile gid="318"/>
@@ -29375,8 +29375,8 @@
    <tile gid="318"/>
    <tile gid="318"/>
    <tile gid="318"/>
-   <tile gid="318"/>
-   <tile gid="318"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
    <tile/>
    <tile/>
    <tile/>
@@ -29509,25 +29509,24 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
+   <tile gid="317"/>
    <tile/>
    <tile/>
    <tile/>
