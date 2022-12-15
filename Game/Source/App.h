@@ -21,6 +21,7 @@ class Map;
 class Enemy;
 //L07 DONE 2: Add Physics module
 class Physics;
+class PathFinding;
 
 class App
 {
@@ -92,6 +93,7 @@ public:
 	Map* map;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
+	PathFinding* pathfinding;
 
 private:
 

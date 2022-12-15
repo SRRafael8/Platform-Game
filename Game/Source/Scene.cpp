@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "EntityManager.h"
 #include "Map.h"
+#include "PathFinding.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -58,7 +59,18 @@ bool Scene::Start()
 	texturescene = app->tex->Load(textureintro);
 	texturescene2 = app->tex->Load(texturelobby);
 	// L03: DONE: Load map
-	app->map->Load();
+	bool retLoad = app->map->Load();
+
+	if (retLoad) {
+		int w, h;
+		uchar* data = NULL;
+
+		bool retWalkMap = app->map->CreateWalkabilityMap(w, h, &data);
+		if (retWalkMap) app->pathfinding->SetMap(w, h, data);
+
+		RELEASE_ARRAY(data);
+
+	}
 
 	// L04: DONE 7: Set the window title with map/tileset info
 	SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d",
