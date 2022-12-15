@@ -18,7 +18,7 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 		idleanim.PushBack({ (i * 150), 415, 25, 39 });
 	}
 	idleanim.loop = true;
-	idleanim.speedx = 0.1f;
+	idleanim.speedx = 0.07f;
 
 	//Walking dreta
 	for (int i = 0; i < 8; i++) {
@@ -36,27 +36,14 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 
 	//Walking esquerra
 	for (int i = 7; i > 1; i--) {
-		leftwalk.PushBack({ 2352 - (i * 150), 0, 25, 39 });
+		leftwalk.PushBack({ 2327 - (i * 150), 0, 25, 39 });
 	}
 	leftwalk.loop = true;
 	leftwalk.speedx = 0.1f;
 
-	//saltimbanquis dretísssssssima
-	for (int i = 7; i > 0; i--) {
-		jumpingesquerra.PushBack({ (i * 56), 57 * 3, 56, 56 });
-	}
-	/*jumpingesquerra.PushBack({ (5 * 56), 57 * 4, 56, 56 });
-	jumpingesquerra.PushBack({ (6 * 56), 57 * 4, 56, 56 });
-	jumpingesquerra.PushBack({ (7 * 56), 57 * 4, 56, 56 });*/
-	jumpingesquerra.loop = false;
-	jumpingesquerra.speedx = 0.1f;
-
 	//mortïsssssimo
-	for (int i = 2; i > 0; i--) {
-		muertesita.PushBack({ (i * 56), 57 * 6, 56, 56 });
-	}
-	for (int i = 7; i > 0; i--) {
-		muertesita.PushBack({ (i * 56), 57 * 5, 56, 56 });
+	for (int i = 0; i < 3; i++) {
+		muertesita.PushBack({ (i * 150), 131, 25, 39 });
 	}
 	muertesita.loop = false;
 	muertesita.speedx = 0.1f;
@@ -155,9 +142,6 @@ bool Enemy::Update()
 			else if (position.x < 133 * 23) {
 				app->audio->PlayFx(runsound);
 			}
-			/*if (position.x > 23 * 5 && position.x < 107 * 23) {
-				app->render->camera.x = -position.x + 100;
-			}*/
 			currentAnimation = &leftwalk;
 		}
 
