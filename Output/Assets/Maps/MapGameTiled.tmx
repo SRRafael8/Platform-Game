@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="150" height="25" tilewidth="23" tileheight="23" infinite="0" nextlayerid="18" nextobjectid="2">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="150" height="25" tilewidth="23" tileheight="23" infinite="0" nextlayerid="18" nextobjectid="2">
  <tileset firstgid="1" name="oak_woods_tileset" tilewidth="23" tileheight="23" spacing="1" margin="1" tilecount="315" columns="21">
   <image source="oak_woods_tileset.png" width="504" height="360"/>
  </tileset>
@@ -51,6 +51,7 @@
  <layer id="14" name="ARBOL1" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile gid="319"/>
@@ -3808,6 +3809,7 @@
  <layer id="15" name="arbol2" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile gid="1912"/>
@@ -7565,6 +7567,7 @@
  <layer id="16" name="ARBOL3" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile gid="3487"/>
@@ -11322,6 +11325,7 @@
  <layer id="7" name="objects below" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -15079,6 +15083,7 @@
  <layer id="6" name="Objects" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -18836,6 +18841,7 @@
  <layer id="1" name="Principal" width="150" height="25">
   <properties>
    <property name="Draw" type="bool" value="true"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -22593,6 +22599,7 @@
  <layer id="9" name="Collisions" width="150" height="25" visible="0">
   <properties>
    <property name="Draw" type="bool" value="false"/>
+   <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
    <tile/>
@@ -26347,8 +26354,9 @@
    <tile gid="317"/>
   </data>
  </layer>
- <layer id="17" name="WalkabilityE" width="150" height="25">
+ <layer id="17" name="Navigation" width="150" height="25">
   <properties>
+   <property name="Draw" type="bool" value="false"/>
    <property name="Navigation" type="bool" value="true"/>
   </properties>
   <data>
