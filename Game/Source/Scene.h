@@ -48,6 +48,8 @@ private:
 	SDL_Texture* texturescene2;
 	SDL_Texture* texturescreen3;
 	SDL_Texture* texturescreen4;
+	SDL_Texture* mouseTileTex = nullptr;
+	SDL_Texture* originTex = nullptr;
 	const char* textureintro;
 	const char* texturelobby;
 	const char* texturedeath;
@@ -55,6 +57,9 @@ private:
 	bool introactiva = true;
 	bool introactiva2 = true;
 	int timer = 200;
+
+	iPoint origin;
+	bool originSelected = false;
 
 
 };

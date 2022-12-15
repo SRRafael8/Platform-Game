@@ -147,6 +147,31 @@ iPoint Map::MapToWorld(int x, int y) const
     return ret;
 }
 
+iPoint Map::WorldToMap(int x, int y)
+{
+    iPoint ret(0, 0);
+
+    if (mapData.type == MAPTYPE_ORTHOGONAL)
+    {
+        ret.x = x / mapData.tileWidth;
+        ret.y = y / mapData.tileHeight;
+    }
+    else if (mapData.type == MAPTYPE_ISOMETRIC)
+    {
+        float halfWidth = mapData.tileWidth * 0.5f;
+        float halfHeight = mapData.tileHeight * 0.5f;
+        ret.x = int((x / halfWidth + y / halfHeight) / 2);
+        ret.y = int((y / halfHeight - x / halfWidth) / 2);
+    }
+    else
+    {
+        LOG("Unknown map type");
+        ret.x = x; ret.y = y;
+    }
+
+    return ret;
+}
+
 // Get relative Tile rectangle
 SDL_Rect TileSet::GetTileRect(int gid) const
 {
@@ -407,6 +432,17 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
+        mapData.type = MAPTYPE_UNKNOWN;
+
+        mapData.type = MAPTYPE_UNKNOWN;
+        if (strcmp(map.attribute("orientation").as_string(), "isometric") == 0)
+        {
+            mapData.type = MAPTYPE_ISOMETRIC;
+        }
+        if (strcmp(map.attribute("orientation").as_string(), "orthogonal") == 0)
+        {
+            mapData.type = MAPTYPE_ORTHOGONAL;
+        }
     }
 
     return ret;
