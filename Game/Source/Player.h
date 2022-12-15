@@ -72,6 +72,8 @@ private:
 
 	float yVel = 0;
 
+	int timer = 10;
+
 };
 
 #endif // __PLAYER_H__
