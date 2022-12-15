@@ -432,17 +432,8 @@ bool Map::LoadMap(pugi::xml_node mapFile)
         mapData.width = map.attribute("width").as_int();
         mapData.tileHeight = map.attribute("tileheight").as_int();
         mapData.tileWidth = map.attribute("tilewidth").as_int();
-        mapData.type = MAPTYPE_UNKNOWN;
-
-        mapData.type = MAPTYPE_UNKNOWN;
-        if (strcmp(map.attribute("orientation").as_string(), "isometric") == 0)
-        {
-            mapData.type = MAPTYPE_ISOMETRIC;
-        }
-        if (strcmp(map.attribute("orientation").as_string(), "orthogonal") == 0)
-        {
-            mapData.type = MAPTYPE_ORTHOGONAL;
-        }
+        mapData.type = MAPTYPE_ORTHOGONAL;
+        mapData.type = MAPTYPE_ORTHOGONAL;
     }
 
     return ret;
