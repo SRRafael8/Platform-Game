@@ -72,7 +72,7 @@ private:
 
 	float yVel = 0;
 
-	int timer = 10;
+	int timer = 100;
 
 };
 

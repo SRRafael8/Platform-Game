@@ -15,14 +15,14 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 
 	//idle Animation
 	for (int i = 0; i < 4; i++) {
-		idleanim.PushBack({ (i * 150), 415, 25, 39 });
+		idleanim.PushBack({ 13 + (i * 150), 415, 25, 39 });
 	}
 	idleanim.loop = true;
 	idleanim.speedx = 0.07f;
 
 	//Walking dreta
 	for (int i = 0; i < 8; i++) {
-		rightwalk.PushBack({ (i * 150), 0, 25, 39 });
+		rightwalk.PushBack({ 13 + (i * 150), 0, 25, 39 });
 	}
 	rightwalk.loop = true;
 	rightwalk.speedx = 0.1f;
@@ -36,14 +36,14 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 
 	//Walking esquerra
 	for (int i = 7; i > 1; i--) {
-		leftwalk.PushBack({ 2327 - (i * 150), 0, 25, 39 });
+		leftwalk.PushBack({ 2327 + 13 - (i * 150), 0, 25, 39 });
 	}
 	leftwalk.loop = true;
 	leftwalk.speedx = 0.1f;
 
 	//mortïsssssimo
 	for (int i = 0; i < 3; i++) {
-		muertesita.PushBack({ (i * 150), 131, 25, 39 });
+		muertesita.PushBack({ 13 +(i * 150), 131, 25, 39 });
 	}
 	muertesita.loop = false;
 	muertesita.speedx = 0.1f;
@@ -61,8 +61,6 @@ bool Enemy::Awake() {
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
 	texturePath = "Assets/Textures/Mushroom.png";
-	texturedeath = "Assets/Scenes/deathscreen.png";
-	texturewin = "Assets/Scenes/winscreen.png";
 
 
 	//L02: DONE 5: Get Player parameters from XML
@@ -77,8 +75,6 @@ bool Enemy::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
-	texturescene3 = app->tex->Load(texturewin);
-	texturescene4 = app->tex->Load(texturedeath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 16, bodyType::DYNAMIC);

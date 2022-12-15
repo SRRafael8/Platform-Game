@@ -232,13 +232,13 @@ bool Player::Update()
 
 	if (lose == true) {
 		timer--;;
-		if (position.x < 23 * 5 && timer==0) {
+		if (position.x < 23 * 5 && timer <= 0) {
 			app->render->DrawTexture(texturescene4, 0, 0);
 		}
-		if (position.x > 23 * 5 && position.x < 107 * 23 && timer == 0) {
+		if (position.x > 23 * 5 && position.x < 107 * 23 && timer <= 0) {
 			app->render->DrawTexture(texturescene4, position.x - 106, 0);
 		}
-		if (position.x > 107 * 23 && timer == 0) {
+		if (position.x > 107 * 23 && timer <= 0) {
 			app->render->DrawTexture(texturescene4, 2360, 0);
 		}
 	}
