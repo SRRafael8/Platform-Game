@@ -54,6 +54,7 @@ private:
 
 	// L07 DONE 5: Add physics to the player - declare a Physics body
 	PhysBody* pbody;
+	PhysBody* pbody2;
 
 	int pickCoinFxId;
 	int winsound;
@@ -74,7 +75,8 @@ private:
 	float yVel = 0;
 
 	int timer = 100;
-	int timer2 = 60;
+	int timer2 = 50;
+	int timerata
 
 };
 

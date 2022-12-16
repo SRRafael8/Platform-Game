@@ -28,7 +28,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	rightwalk.speedx = 0.1f;
 
 	//atacacion sin moricion
-	for (int i = 6; i > 0; i--) {
+	for (int i = 5; i > 0; i--) {
 		atacacion.PushBack({ (i * 56), 57, 56, 56 });
 	}
 	atacacion.loop = true;
@@ -188,10 +188,11 @@ bool Player::Update()
 		if (timer2 <= 0) {
 			grounded = true;
 			opciontimer2 = false;
-			timer2 = 60;
+			timer2 = 50;
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_K)==KEY_DOWN && ultimatelosecondition == false){
+			pbody2=app->physics->CreateRectangle(position.x + 25, position.y+10, 15,6, bodyType::STATIC);
 			currentAnimation = &atacacion;
 			grounded = false;
 			opciontimer2 = true;
