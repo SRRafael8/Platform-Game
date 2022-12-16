@@ -3805,7 +3805,7 @@
    <tile gid="1878"/>
   </data>
  </layer>
- <layer id="15" name="arbol2" width="150" height="25">
+ <layer id="15" name="arbol2" width="150" height="25" parallaxx="2">
   <properties>
    <property name="Draw" type="bool" value="true"/>
    <property name="Navigation" type="bool" value="false"/>
@@ -7563,7 +7563,7 @@
    <tile gid="3457"/>
   </data>
  </layer>
- <layer id="16" name="ARBOL3" width="150" height="25">
+ <layer id="16" name="ARBOL3" width="150" height="25" parallaxx="3">
   <properties>
    <property name="Draw" type="bool" value="true"/>
    <property name="Navigation" type="bool" value="false"/>
