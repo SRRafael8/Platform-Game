@@ -28,10 +28,10 @@ Player::Player() : Entity(EntityType::PLAYER)
 	rightwalk.speedx = 0.1f;
 
 	//atacacion sin moricion
-	for (int i = 0; i < 6; i++) {
+	for (int i = 6; i > 0; i--) {
 		atacacion.PushBack({ (i * 56), 57, 56, 56 });
 	}
-	atacacion.loop = false;
+	atacacion.loop = true;
 	atacacion.speedx = 0.1f;
 
 	//Walking esquerra
@@ -180,11 +180,21 @@ bool Player::Update()
 			}
 			currentAnimation = &rightwalk;
 		}
+		
+		if (opciontimer2 == true) {
+			timer2--;
+		}
+
+		if (timer2 <= 0) {
+			grounded = true;
+			opciontimer2 = false;
+			timer2 = 60;
+		}
 
 		if (app->input->GetKey(SDL_SCANCODE_K)==KEY_DOWN && ultimatelosecondition == false){
-			pbody->ctype = ColliderType::ATTACK;
-			grounded = false;
 			currentAnimation = &atacacion;
+			grounded = false;
+			opciontimer2 = true;
 		}
 	}
 	if (!grounded) {

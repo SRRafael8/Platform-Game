@@ -69,10 +69,12 @@ private:
 	bool introactiva2 = false;
 	bool lose=false;
 	bool ganar=false;
+	bool opciontimer2=false;
 
 	float yVel = 0;
 
 	int timer = 100;
+	int timer2 = 60;
 
 };
 
