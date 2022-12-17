@@ -14,6 +14,7 @@ enum class EntityType
 	ITEM,
 	UNKNOWN,
 	ENEMY
+
 };
 
 class Entity
