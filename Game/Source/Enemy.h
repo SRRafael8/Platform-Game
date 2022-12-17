@@ -50,6 +50,8 @@ private:
 	SDL_Texture* texturescene4;
 	const char* texturedeath;
 	const char* texturewin;
+	SDL_Texture* originTileTex = nullptr;
+	SDL_Texture* originTex = nullptr;
 
 
 	// L07 DONE 5: Add physics to the player - declare a Physics body
@@ -71,9 +73,13 @@ private:
 	bool ganar = false;
 	bool enemymuerto = false;
 	bool playermuerto = false;
+	bool originSelected=false;
 
 	int timer = 50;
 	int timer2 = 100;
+
+	float playerpositionx;
+	float playerpositiony;
 
 	float yVel = 0;
 

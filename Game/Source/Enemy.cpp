@@ -8,6 +8,9 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Player.h"
+#include "Map.h"
+#include "Pathfinding.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY)
 {
@@ -95,13 +98,42 @@ bool Enemy::Start() {
 
 	currentAnimation = &idleanim;
 
+	originTileTex = app->tex->Load("Assets/Maps/path_square.png");
+
+	originTex = app->tex->Load("Assets/Maps/x_square.png");
+
 	return true;
 }
 
 bool Enemy::Update()
 {
+	playerpositionx = app->scene->player->position.x;
+	playerpositiony = app->scene->player->position.y;
+	iPoint playerTile = iPoint(0, 0);
+	playerTile = app->map->WorldToMap(playerpositionx,playerpositiony+23);
+	iPoint origin = iPoint(position.x, position.y);
 
-	// L07 DONE 5: Add physics to the player - updated player position using physics
+	if (originSelected == true)
+	{
+		app->pathfinding->CreatePath(origin, playerTile);
+		originSelected = false;
+	}
+	else
+	{
+		origin = playerTile;
+		originSelected = true;
+		app->pathfinding->ClearLastPath();
+	}
+	
+	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
+	for (uint i = 0; i < path->Count(); ++i)
+	{
+		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		app->render->DrawTexture(originTileTex, pos.x, pos.y);
+	}
+
+	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
+	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
 
 	int speed = 1;
 	int currentspeed = 0;
