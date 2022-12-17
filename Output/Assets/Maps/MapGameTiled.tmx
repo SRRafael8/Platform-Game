@@ -50,7 +50,7 @@
  </tileset>
  <layer id="14" name="ARBOL1" width="150" height="25">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
   </properties>
   <data>
    <tile gid="319"/>
@@ -3807,7 +3807,7 @@
  </layer>
  <layer id="15" name="arbol2" width="150" height="25">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
    <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
@@ -7565,7 +7565,7 @@
  </layer>
  <layer id="16" name="ARBOL3" width="150" height="25">
   <properties>
-   <property name="Draw" type="bool" value="false"/>
+   <property name="Draw" type="bool" value="true"/>
    <property name="Navigation" type="bool" value="false"/>
   </properties>
   <data>
