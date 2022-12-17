@@ -81,7 +81,7 @@ bool Enemy::Start() {
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	//pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 18, bodyType::DYNAMIC);
-	pbody = app->physics->CreateRectangle(position.x + 80, position.y - 276, 18, 36, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + 80 + (70 * 23), position.y - 253, 18, 36, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -142,48 +142,43 @@ bool Enemy::Update()
 
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
 
+
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (introactiva == false) {
-		if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0 && enemymuerto == false) {
-			vel = b2Vec2(0, +2 * GRAVITY_Y);
-			time--;
-			app->audio->PlayFx(jumpsound);
-			if (grounded) {
-				yVel = 0.85 * GRAVITY_Y;
-				grounded = false;
-				currentAnimation = &jumpingesquerra;
-			}
-		}
-		else if (enemymuerto == false && grounded == true) {
-			b2Vec2(0, -GRAVITY_Y);
-			currentAnimation = &idleanim;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT && enemymuerto == false) {
-			currentspeed = -speed;
-
-			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0) {
-				if (grounded) {
-					yVel = 0.85 * GRAVITY_Y;
-					grounded = false;
-				}
-				app->audio->PlayFx(jumpsound);
-				time--;
-			}
-			else if (position.x < 133 * 23) {
-				app->audio->PlayFx(runsound);
-			}
-			currentAnimation = &leftwalk;
-		}
-
-		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT && enemymuerto == false) {
+		//if (enemymuerto == false && grounded == true) {
+		//	b2Vec2(0, -GRAVITY_Y);
+		//	currentAnimation = &idleanim;
+		//}
+		const DynArray<iPoint>* pather = app->pathfinding->GetLastPath();
+		if (pather->At(1) == nullptr) {
 			currentspeed = speed;
-
-			if (position.x < 133 * 23) {
+			
+			if (this->position.x >= 81 * 23) {
+				currentspeed = -speed;
 				app->audio->PlayFx(runsound);
+				currentAnimation = &leftwalk;
 			}
-			currentAnimation = &rightwalk;
+			if (this->position.x <= 68 * 23) {
+				currentspeed = speed;
+				app->audio->PlayFx(runsound);
+				currentAnimation = &rightwalk;
+			}
+			
 		}
+		else {
+			
+			if (pather->At(2)->x < this->position.x+10 && enemymuerto == false) {
+				currentspeed = -speed;
+				app->audio->PlayFx(runsound);
+				currentAnimation = &leftwalk;
+			}
+			if (pather->At(2)->x > this->position.x+10 && enemymuerto == false) {
+				currentspeed = speed;
+				app->audio->PlayFx(runsound);
+				currentAnimation = &rightwalk;
+			}
+		}
+
 	}
 	if (!grounded) {
 		yVel -= GRAVITY_Y * 0.02;
