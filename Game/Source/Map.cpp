@@ -60,7 +60,10 @@ bool Map::CreateWalkabilityMap(int& width, int& height, uchar** buffer) const
                 if (tileset != NULL)
                 {
                     //According to the mapType use the ID of the tile to set the walkability value
-                   if (tileId == 318) map[i] = 1;
+                    if (tileId == 318) {
+                        map[i] = 1;
+                   }
+                       
                    else map[i] = 0;
                 }
             }

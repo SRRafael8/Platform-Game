@@ -189,11 +189,12 @@ bool Player::Update()
 			grounded = true;
 			opciontimer2 = false;
 			timer2 = 50;
-			pbody2->~PhysBody();
+			pbody2->body->SetActive(false);
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_K)==KEY_DOWN && ultimatelosecondition == false){
-			pbody2=app->physics->CreateRectangle(position.x + 25, position.y+10, 15,6, bodyType::STATIC);
+			pbody2=app->physics->CreateRectangle(position.x + 45, position.y+10, 15,6, bodyType::STATIC);
+			pbody2->ctype = ColliderType::ATTACK;
 			
 			currentAnimation = &atacacion;
 			grounded = false;

@@ -69,6 +69,9 @@ private:
 	bool introactiva2 = false;
 	bool lose = false;
 	bool ganar = false;
+	bool enemymuerto = false;
+
+	int timer = 50;
 
 	float yVel = 0;
 

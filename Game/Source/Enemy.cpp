@@ -42,11 +42,11 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 	leftwalk.speedx = 0.1f;
 
 	//mortïsssssimo
-	for (int i = 0; i < 3; i++) {
+	for (int i = 3; i > 0; i--) {
 		muertesita.PushBack({ 13 +(i * 150), 131, 25, 39 });
 	}
-	muertesita.loop = false;
-	muertesita.speedx = 0.1f;
+	muertesita.loop = true;
+	muertesita.speedx = 0.05f;
 
 
 }
@@ -77,7 +77,8 @@ bool Enemy::Start() {
 	texture = app->tex->Load(texturePath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
-	pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 18, bodyType::DYNAMIC);
+	//pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 18, bodyType::DYNAMIC);
+	pbody = app->physics->CreateRectangle(position.x + 80, position.y - 276, 18, 36, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -109,7 +110,7 @@ bool Enemy::Update()
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
 	if (introactiva == false) {
-		if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0 && ultimatelosecondition == false) {
+		if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0 && enemymuerto == false) {
 			vel = b2Vec2(0, +2 * GRAVITY_Y);
 			time--;
 			app->audio->PlayFx(jumpsound);
@@ -119,12 +120,12 @@ bool Enemy::Update()
 				currentAnimation = &jumpingesquerra;
 			}
 		}
-		else if (ultimatelosecondition == false && grounded == true) {
+		else if (enemymuerto == false && grounded == true) {
 			b2Vec2(0, -GRAVITY_Y);
 			currentAnimation = &idleanim;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT && ultimatelosecondition == false) {
+		if (app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT && enemymuerto == false) {
 			currentspeed = -speed;
 
 			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0) {
@@ -141,46 +142,36 @@ bool Enemy::Update()
 			currentAnimation = &leftwalk;
 		}
 
-		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT && ultimatelosecondition == false) {
+		if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT && enemymuerto == false) {
 			currentspeed = speed;
 
-			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT && time > 0) {
-				if (grounded) {
-					yVel = 0.85 * GRAVITY_Y;
-					grounded = false;
-				}
-				time--;
-				app->audio->PlayFx(jumpsound);
-			}
-			else if (position.x < 133 * 23) {
+			if (position.x < 133 * 23) {
 				app->audio->PlayFx(runsound);
 			}
-			/*if (position.x > 23 * 5 && position.x < 107 * 23) {
-				app->render->camera.x = -position.x + 100;
-			}*/
 			currentAnimation = &rightwalk;
 		}
 	}
 	if (!grounded) {
 		yVel -= GRAVITY_Y * 0.02;
 	}
-
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_UP && ultimatelosecondition == false) {
-		time = 0;
-	}
-	if (position.x > 133 * 23 && wincondition == false && app->input->GetKey(SDL_SCANCODE_I) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_J) == KEY_IDLE && app->input->GetKey(SDL_SCANCODE_L) == KEY_IDLE && ultimatelosecondition == false) {
-		app->audio->PlayFx(winsound);
-		wincondition = true;
-	}
-	if (losecondition == true && godmode == 1) {
-		ultimatelosecondition = true;
-		currentAnimation = &muertesita;
-		app->audio->PlayFx(deathsound);
+	if (timer<=0) {
+		
+		
+		SDL_DestroyTexture(texture);
+		pbody->body->SetActive(false);
+		enemymuerto = false;
+		grounded = true;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) {
 		godmode * -1;
 	}
+
+	if (enemymuerto == true) {
+		timer--;
+	}
+	
+
 
 
 	//Set the velocity of the pbody of the player
@@ -245,6 +236,13 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::ATTACK:
+		LOG("Collision ATTACK");
+		enemymuerto = true;
+		grounded = false;
+		currentAnimation = &muertesita;
+		app->audio->PlayFx(deathsound);
 		break;
 	default: grounded = false;
 
