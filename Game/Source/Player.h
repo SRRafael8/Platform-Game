@@ -76,7 +76,7 @@ private:
 
 	int timer = 100;
 	int timer2 = 50;
-	int timerata
+	int timerata;
 
 };
 
