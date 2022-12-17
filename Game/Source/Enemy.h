@@ -70,6 +70,7 @@ private:
 	bool lose = false;
 	bool ganar = false;
 	bool enemymuerto = false;
+	bool playermuerto = false;
 
 	int timer = 50;
 	int timer2 = 100;

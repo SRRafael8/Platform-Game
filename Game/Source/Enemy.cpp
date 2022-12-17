@@ -171,8 +171,13 @@ bool Enemy::Update()
 		timer--;
 	}
 	
+	if (playermuerto == true) {
+		timer2--;
+	}
 
-
+	if (timer2 <= 0) {
+		SDL_DestroyTexture(texture);
+	}
 
 	//Set the velocity of the pbody of the player
 	vel = b2Vec2(currentspeed, yVel);
@@ -245,9 +250,8 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		app->audio->PlayFx(deathsound);
 		break;
 	case ColliderType::PLAYER:
+		playermuerto = true;
 		LOG("Collision PLAYER");
-		SDL_DestroyTexture(texture);
-		
 		
 	default: grounded = false;
 

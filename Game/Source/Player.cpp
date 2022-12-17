@@ -8,6 +8,7 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Enemy.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -247,7 +248,7 @@ bool Player::Update()
 	}
 
 	if (lose == true) {
-		timer--;;
+		timer--;
 		if (position.x < 23 * 5 && timer <= 0) {
 			app->render->DrawTexture(texturescene4, 0, 0);
 		}
