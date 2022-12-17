@@ -108,6 +108,7 @@ bool Player::Start() {
 	deathsound = app->audio->LoadFx("Assets/Audio/Fx/Deathsound.wav");
 	winsound = app->audio->LoadFx("Assets/Audio/Fx/Winsound.wav");
 	jumpsound = app->audio->LoadFx("Assets/Audio/Fx/jumpyjump.wav");
+	attacksound = app->audio->LoadFx("Assets/Audio/Fx/attack.wav");
 
 	currentAnimation = &idleanim;
 
@@ -193,9 +194,10 @@ bool Player::Update()
 		}
 
 		if (app->input->GetKey(SDL_SCANCODE_K)==KEY_DOWN && ultimatelosecondition == false){
-			pbody2=app->physics->CreateRectangle(position.x + 45, position.y+10, 15,6, bodyType::STATIC);
+			app->audio->PlayFx(attacksound);
+			pbody2=app->physics->CreateRectangle(position.x + 40, position.y+10, 15,6, bodyType::STATIC);
 			pbody2->ctype = ColliderType::ATTACK;
-			
+		
 			currentAnimation = &atacacion;
 			grounded = false;
 			opciontimer2 = true;

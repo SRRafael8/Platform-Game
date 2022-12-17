@@ -61,6 +61,7 @@ private:
 	int deathsound;
 	int jumpsound;
 	int runsound;
+	int attacksound;
 	int time = 20;
 	bool wincondition = false;
 	bool losecondition = false;

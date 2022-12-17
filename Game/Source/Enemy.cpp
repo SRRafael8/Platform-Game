@@ -42,8 +42,8 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 	leftwalk.speedx = 0.1f;
 
 	//mortïsssssimo
-	for (int i = 3; i > 0; i--) {
-		muertesita.PushBack({ 13 +(i * 150), 131, 25, 39 });
+	for (int i = 4; i > 0; i--) {
+		muertesita.PushBack({ 13 +(i * 151), 131, 25, 39 });
 	}
 	muertesita.loop = true;
 	muertesita.speedx = 0.05f;
@@ -89,7 +89,7 @@ bool Enemy::Start() {
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
 	runsound = app->audio->LoadFx("Assets/Audio/Fx/grassrunsupershort.wav");
-	deathsound = app->audio->LoadFx("Assets/Audio/Fx/Deathsound.wav");
+	deathsound = app->audio->LoadFx("Assets/Audio/Fx/enemydeath.wav");
 	winsound = app->audio->LoadFx("Assets/Audio/Fx/Winsound.wav");
 	jumpsound = app->audio->LoadFx("Assets/Audio/Fx/jumpyjump.wav");
 
@@ -244,6 +244,11 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		currentAnimation = &muertesita;
 		app->audio->PlayFx(deathsound);
 		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		SDL_DestroyTexture(texture);
+		
+		
 	default: grounded = false;
 
 	}

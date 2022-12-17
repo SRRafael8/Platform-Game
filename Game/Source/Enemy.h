@@ -72,6 +72,7 @@ private:
 	bool enemymuerto = false;
 
 	int timer = 50;
+	int timer2 = 100;
 
 	float yVel = 0;
 
