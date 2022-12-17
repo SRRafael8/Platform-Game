@@ -107,13 +107,15 @@ bool Enemy::Start() {
 
 bool Enemy::Update()
 {
-	playerpositionx = app->scene->player->position.x;
+	playerpositionx = app->scene->player->position.x+10;
 	playerpositiony = app->scene->player->position.y;
+	app->pathfinding->ClearLastPath();
 	iPoint playerTile = iPoint(0, 0);
-	playerTile = app->map->WorldToMap(playerpositionx,playerpositiony+23);
-	iPoint origin = iPoint(position.x, position.y);
+	playerTile = app->map->WorldToMap(playerpositionx+5,playerpositiony+23);
+	iPoint origin = iPoint(app->map->WorldToMap(app->scene->enemy->position.x, app->scene->enemy->position.y+23));
+	app->pathfinding->CreatePath(origin, playerTile);
 
-	if (originSelected == true)
+	/*if (originSelected == true)
 	{
 		app->pathfinding->CreatePath(origin, playerTile);
 		originSelected = false;
@@ -122,8 +124,8 @@ bool Enemy::Update()
 	{
 		origin = playerTile;
 		originSelected = true;
-		app->pathfinding->ClearLastPath();
-	}
+		
+	}*/
 	
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
