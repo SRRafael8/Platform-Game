@@ -81,7 +81,7 @@ bool EnemyV::Start() {
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	//pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 18, bodyType::DYNAMIC);
-	pbody = app->physics->CreateCircle(position.x + 80 + (80 * 23), position.y - 253, 10, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 80 + (40 * 23), position.y - 300, 10, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
@@ -176,13 +176,23 @@ bool EnemyV::Update()
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
+			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x > app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto == false) {
+				currentspeedx = -1;
+				app->audio->PlayFx(runsound);
+				currentAnimation = &leftwalk;
+			}
+			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x <= app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto == false) {
+				currentspeedx = 1;
+				app->audio->PlayFx(runsound);
+				currentAnimation = &rightwalk;
+			}
 			else {
 				currentAnimation = &rightwalk;
 				
 			}
 
 		}
-		//else {
+		else {
 
 		//	if (pather->At(2)->x < this->position.x + 10 && enemymuerto == false) {
 		//		currentspeed = -speed;
@@ -194,12 +204,14 @@ bool EnemyV::Update()
 		//		app->audio->PlayFx(runsound);
 		//		currentAnimation = &rightwalk;
 		//	}
-		//}
+
+			
+		}
 
 	}
-	if (!grounded) {
-		GRAVITY_Y * 0;
-	}
+	//if (!grounded) {
+	//	yVel -= GRAVITY_Y * 0.02;
+	//}
 	if (timer <= 0) {
 
 
