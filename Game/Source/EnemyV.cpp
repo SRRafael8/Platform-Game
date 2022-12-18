@@ -128,10 +128,10 @@ bool EnemyV::Update()
 
 	}*/
 
-	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
-	for (uint i = 0; i < path->Count(); ++i)
+	const DynArray<iPoint>* pathv = app->pathfinding->GetLastPath();
+	for (uint i = 0; i < pathv->Count(); ++i)
 	{
-		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
+		iPoint pos = app->map->MapToWorld(pathv->At(i)->x, pathv->At(i)->y);
 		app->render->DrawTexture(originTileTex, pos.x, pos.y);
 	}
 
@@ -139,9 +139,10 @@ bool EnemyV::Update()
 	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
 
 
-	int currentspeed = 0;
+	int currentspeedx = 0;
+	int currentspeedy = 0;
 
-	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
+	b2Vec2 vel = b2Vec2(0, 0);
 
 
 	//L02: DONE 4: modify the position of the player using arrow keys and render the texture
@@ -150,45 +151,55 @@ bool EnemyV::Update()
 		//	b2Vec2(0, -GRAVITY_Y);
 		//	currentAnimation = &idleanim;
 		//}
-		const DynArray<iPoint>* pather = app->pathfinding->GetLastPath();
-		if (pather->At(1) == nullptr) {
+		const DynArray<iPoint>* patherv = app->pathfinding->GetLastPath();
+		if (patherv->At(1) == nullptr) {
+			currentspeedx = speed;
+			currentspeedy = speedy;
 
-
-			if (this->position.x >= 80 * 23) {
+			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
 				if (speed > 0)
-					currentspeed = speed;
+					currentspeedy = speedy;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (this->position.x <= 69 * 23) {
+			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT) {
 				if (speed < 0)
-					currentspeed = -speed;
+					currentspeedy = -speedy;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
-			else {
-				currentspeed = speed;
-			}
-
-		}
-		else {
-
-			if (pather->At(2)->x < this->position.x + 10 && enemymuerto == false) {
-				currentspeed = -speed;
+			if (app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
+				if (speed > 0)
+					currentspeedx = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (pather->At(2)->x > this->position.x + 10 && enemymuerto == false) {
-				currentspeed = speed;
+			if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
+				if (speed < 0)
+					currentspeedx = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
+
 		}
+		//else {
+
+		//	if (pather->At(2)->x < this->position.x + 10 && enemymuerto == false) {
+		//		currentspeed = -speed;
+		//		app->audio->PlayFx(runsound);
+		//		currentAnimation = &leftwalk;
+		//	}
+		//	if (pather->At(2)->x > this->position.x + 10 && enemymuerto == false) {
+		//		currentspeed = speed;
+		//		app->audio->PlayFx(runsound);
+		//		currentAnimation = &rightwalk;
+		//	}
+		//}
 
 	}
-	if (!grounded) {
-		yVel -= GRAVITY_Y * 0.02;
-	}
+	//if (!grounded) {
+	//	yVel -= GRAVITY_Y * 0.02;
+	//}
 	if (timer <= 0) {
 
 
@@ -215,7 +226,7 @@ bool EnemyV::Update()
 	}
 
 	//Set the velocity of the pbody of the player
-	vel = b2Vec2(currentspeed, yVel);
+	vel = b2Vec2(currentspeedx, currentspeedy);
 	pbody->body->SetLinearVelocity(vel);
 
 	//Update player position in pixels
