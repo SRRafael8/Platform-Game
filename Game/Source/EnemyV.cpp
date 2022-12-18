@@ -16,37 +16,37 @@ EnemyV::EnemyV() : Entity(EntityType::ENEMYV)
 {
 	name.Create("EnemyV");
 
-	//idle Animation
-	for (int i = 0; i < 4; i++) {
-		idleanim.PushBack({ 13 + (i * 150), 415, 25, 39 });
-	}
-	idleanim.loop = true;
-	idleanim.speedx = 0.07f;
+	////idle Animation
+	//for (int i = 0; i < 4; i++) {
+	//	idleanim.PushBack({(i * 150), 415, 40, 31 });
+	//}
+	//idleanim.loop = true;
+	//idleanim.speedx = 0.07f;
 
 	//Walking dreta
 	for (int i = 0; i < 8; i++) {
-		rightwalk.PushBack({ 13 + (i * 150), 0, 25, 39 });
+		rightwalk.PushBack({ (i * 150), 0, 40, 31 });
 	}
 	rightwalk.loop = true;
 	rightwalk.speedx = 0.1f;
 
 	//atacacion sin moricion
-	for (int i = 0; i < 6; i++) {
-		atacacion.PushBack({ (i * 56), 57, 56, 56 });
+	/*for (int i = 0; i < 6; i++) {
+		atacacion.PushBack({ (i * 150), 57, 40, 31 });
 	}
 	atacacion.loop = false;
-	atacacion.speedx = 0.1f;
+	atacacion.speedx = 0.1f;*/
 
 	//Walking esquerra
-	for (int i = 7; i > 1; i--) {
-		leftwalk.PushBack({ 2327 + 13 - (i * 150), 0, 25, 39 });
+	for (int i = 8; i > 1; i--) {
+		leftwalk.PushBack({ 2352- 40 -(i * 150), 0, 40, 31 });
 	}
 	leftwalk.loop = true;
 	leftwalk.speedx = 0.1f;
 
 	//mortïsssssimo
 	for (int i = 4; i > 0; i--) {
-		muertesita.PushBack({ 13 + (i * 151), 131, 25, 39 });
+		muertesita.PushBack({ (i * 150), 131, 40, 31 });
 	}
 	muertesita.loop = true;
 	muertesita.speedx = 0.05f;
@@ -181,15 +181,24 @@ bool EnemyV::Update()
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x <= app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto == false) {
+			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x < app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto == false) {
 				currentspeedx = 1;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
-			else {
-				currentAnimation = &rightwalk;
-				
+			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x == app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x) {
+				if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).y > app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).y && enemymuerto == false) {
+					currentspeedy = -1;
+					app->audio->PlayFx(runsound);
+					currentAnimation = &leftwalk;
+				}
+				if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).y <= app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).y && enemymuerto == false) {
+					currentspeedy = 1;
+					app->audio->PlayFx(runsound);
+					currentAnimation = &rightwalk;
+				}
 			}
+			
 
 		}
 		else {

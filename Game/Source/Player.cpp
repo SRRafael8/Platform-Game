@@ -19,6 +19,7 @@ Player::Player() : Entity(EntityType::PLAYER)
 	for (int i = 0; i < 6; i++) {
 		idleanim.PushBack({(i * 56), 0, 56, 56 });
 	}
+
 	idleanim.loop = true;
 	idleanim.speedx = 0.1f;
 
