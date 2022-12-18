@@ -155,17 +155,17 @@ bool Enemy::Update()
 		}
 		else {
 			
-			if (pather->At(0)->x < app->scene->enemy->position.x +10 && enemymuerto == false) {
+		/*	if (pather->At(1)->x < app->scene->enemy->position.x +10 && enemymuerto == false) {
 				currentspeed = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (pather->At(0)->x >= app->scene->enemy->position.x +10 && enemymuerto == false) {
+			if (pather->At(1)->x >= app->scene->enemy->position.x +10 && enemymuerto == false) {
 				currentspeed = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
-			}
-			/*if (app->map->WorldToMap(app->scene->enemy->position.x, app->scene->enemy->position.y + 23).x > app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto==false){
+			}*/
+			if (app->map->WorldToMap(app->scene->enemy->position.x, app->scene->enemy->position.y + 23).x > app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto==false){
 				currentspeed = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
@@ -174,7 +174,7 @@ bool Enemy::Update()
 				currentspeed = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
-			}*/
+			}
 		}
 
 	}

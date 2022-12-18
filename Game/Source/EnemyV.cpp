@@ -63,7 +63,7 @@ bool EnemyV::Awake() {
 	//L02: DONE 1: Initialize Player parameters
 	//pos = position;
 	//texturePath = "Assets/Textures/player/idle1.png";
-	texturePath = "Assets/Textures/Mushroom.png";
+	texturePath = "Assets/Textures/Eye.png";
 
 
 	//L02: DONE 5: Get Player parameters from XML
@@ -139,7 +139,7 @@ bool EnemyV::Update()
 
 
 	int currentspeedx = 0;
-	int currentspeedy = 0;
+	float currentspeedy = 0.5;
 
 	b2Vec2 vel = b2Vec2(0, 0);
 
@@ -152,35 +152,33 @@ bool EnemyV::Update()
 		//}
 		const DynArray<iPoint>* patherv = app->pathfinding->GetLastPath();
 		if (patherv->At(1) == nullptr) {
-			currentspeedx = speed;
-			currentspeedy = speedy;
+			currentspeedx = 0;
+			currentspeedy = 0;
 
 			if (app->input->GetKey(SDL_SCANCODE_M) == KEY_REPEAT) {
-				if (speed > 0)
-					currentspeedy = speedy;
+				currentspeedy = 1;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT) {
-				if (speed < 0)
-					currentspeedy = -speedy;
+				currentspeedy = -1;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT) {
-				if (speed > 0)
-					currentspeedx = speed;
+				currentspeedx = -1;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
 			if (app->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT) {
-				if (speed < 0)
-					currentspeedx = -speed;
+				
+				currentspeedx = 1;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
 			else {
-				currentAnimation = &idleanim;
+				currentAnimation = &rightwalk;
+				
 			}
 
 		}
@@ -199,9 +197,9 @@ bool EnemyV::Update()
 		//}
 
 	}
-	//if (!grounded) {
-	//	yVel -= GRAVITY_Y * 0.02;
-	//}
+	if (!grounded) {
+		GRAVITY_Y * 0;
+	}
 	if (timer <= 0) {
 
 
