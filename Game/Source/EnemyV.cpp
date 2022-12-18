@@ -81,7 +81,7 @@ bool EnemyV::Start() {
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	//pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 18, bodyType::DYNAMIC);
-	pbody = app->physics->CreateCircle(position.x + 80 + (69 * 23), position.y - 253, 10, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 80 + (80 * 23), position.y - 253, 10, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;

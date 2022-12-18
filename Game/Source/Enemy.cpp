@@ -150,34 +150,17 @@ bool Enemy::Update()
 		//	currentAnimation = &idleanim;
 		//}
 		const DynArray<iPoint>* pather = app->pathfinding->GetLastPath();
-		if (pather->At(1) == nullptr) {
-			
-			
-			if (this->position.x >= 80 * 23) {
-				if(speed>0)
-					currentspeed = speed;
-				app->audio->PlayFx(runsound);
-				currentAnimation = &leftwalk;
-			}
-			if (this->position.x <= 69 * 23) {
-				if(speed<0)
-					currentspeed = -speed;
-				app->audio->PlayFx(runsound);
-				currentAnimation = &rightwalk;
-			}
-			else {
-				currentspeed = speed;
-			}
-			
+		if (pather->At(1) == nullptr) {	
+			currentAnimation = &idleanim;
 		}
 		else {
 			
-			if (pather->At(2)->x < this->position.x+10 && enemymuerto == false) {
+			if (pather->At(1)->x < this->position.x+10 && enemymuerto == false) {
 				currentspeed = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (pather->At(2)->x > this->position.x+10 && enemymuerto == false) {
+			if (pather->At(1)->x >= this->position.x+10 && enemymuerto == false) {
 				currentspeed = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
