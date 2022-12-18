@@ -1,6 +1,7 @@
 #include "App.h"
 #include "PathFinding.h"
 #include "Enemy.h"
+#include "EnemyV.h"
 
 #include "Defs.h"
 #include "Log.h"

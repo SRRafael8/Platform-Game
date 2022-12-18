@@ -19,6 +19,7 @@ class Scene;
 class EntityManager;
 class Map;
 class Enemy;
+class EnemyV;
 //L07 DONE 2: Add Physics module
 class Physics;
 class PathFinding;

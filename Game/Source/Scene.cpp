@@ -42,6 +42,9 @@ bool Scene::Awake(pugi::xml_node& config)
 	enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
 	enemy->parameters = config.child("enemy");
 
+	enemyV = (EnemyV*)app->entityManager->CreateEntity(EntityType::ENEMYV);
+	enemyV->parameters = config.child("enemyV");
+
 	textureintro = "Assets/Scenes/startscene.png";
 	texturelobby = "Assets/Scenes/lobbyscreen.png";
 	texturedeath = "Assets/Scenes/deathscreen.png";

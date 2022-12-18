@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Enemy.h"
+#include "EnemyV.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -303,6 +304,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			lose = true;
 			break;
 		case ColliderType::ENEMY:
+			LOG("Collision ENEMY");
+			losecondition = true;
+			lose = true;
+			break;
+		case ColliderType::ENEMYV:
 			LOG("Collision ENEMY");
 			losecondition = true;
 			lose = true;

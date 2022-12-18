@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "EnemyV.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -12,9 +13,9 @@
 #include "Map.h"
 #include "Pathfinding.h"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+EnemyV::EnemyV() : Entity(EntityType::ENEMYV)
 {
-	name.Create("Enemy");
+	name.Create("EnemyV");
 
 	//idle Animation
 	for (int i = 0; i < 4; i++) {
@@ -46,7 +47,7 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 
 	//mortïsssssimo
 	for (int i = 4; i > 0; i--) {
-		muertesita.PushBack({ 13 +(i * 151), 131, 25, 39 });
+		muertesita.PushBack({ 13 + (i * 151), 131, 25, 39 });
 	}
 	muertesita.loop = true;
 	muertesita.speedx = 0.05f;
@@ -54,11 +55,11 @@ Enemy::Enemy() : Entity(EntityType::ENEMY)
 
 }
 
-Enemy::~Enemy() {
+EnemyV::~EnemyV() {
 
 }
 
-bool Enemy::Awake() {
+bool EnemyV::Awake() {
 
 	//L02: DONE 1: Initialize Player parameters
 	//pos = position;
@@ -74,20 +75,20 @@ bool Enemy::Awake() {
 	return true;
 }
 
-bool Enemy::Start() {
+bool EnemyV::Start() {
 
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	//pbody = app->physics->CreateCircle(position.x + 80, position.y - 276, 18, bodyType::DYNAMIC);
-	pbody = app->physics->CreateRectangle(position.x + 80 + (70 * 23), position.y - 253, 18, 36, bodyType::DYNAMIC);
+	pbody = app->physics->CreateCircle(position.x + 80 + (69 * 23), position.y - 253, 10, bodyType::DYNAMIC);
 
 	// L07 DONE 6: Assign player class (using "this") to the listener of the pbody. This makes the Physics module to call the OnCollision method
 	pbody->listener = this;
 
 	// L07 DONE 7: Assign collider type
-	pbody->ctype = ColliderType::ENEMY;
+	pbody->ctype = ColliderType::ENEMYV;
 
 	//initialize audio effect - !! Path is hardcoded, should be loaded from config.xml
 	pickCoinFxId = app->audio->LoadFx("Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg");
@@ -105,14 +106,14 @@ bool Enemy::Start() {
 	return true;
 }
 
-bool Enemy::Update()
+bool EnemyV::Update()
 {
-	playerpositionx = app->scene->player->position.x+10;
+	playerpositionx = app->scene->player->position.x + 10;
 	playerpositiony = app->scene->player->position.y;
 	app->pathfinding->ClearLastPath();
 	iPoint playerTile = iPoint(0, 0);
-	playerTile = app->map->WorldToMap(playerpositionx+5,playerpositiony+23);
-	iPoint origin = iPoint(app->map->WorldToMap(app->scene->enemy->position.x, app->scene->enemy->position.y+23));
+	playerTile = app->map->WorldToMap(playerpositionx + 5, playerpositiony + 23);
+	iPoint origin = iPoint(app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23));
 	app->pathfinding->CreatePath(origin, playerTile);
 
 	/*if (originSelected == true)
@@ -124,9 +125,9 @@ bool Enemy::Update()
 	{
 		origin = playerTile;
 		originSelected = true;
-		
+
 	}*/
-	
+
 	const DynArray<iPoint>* path = app->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
 	{
@@ -137,7 +138,7 @@ bool Enemy::Update()
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
 	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
 
-	
+
 	int currentspeed = 0;
 
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
@@ -151,16 +152,16 @@ bool Enemy::Update()
 		//}
 		const DynArray<iPoint>* pather = app->pathfinding->GetLastPath();
 		if (pather->At(1) == nullptr) {
-			
-			
+
+
 			if (this->position.x >= 80 * 23) {
-				if(speed>0)
+				if (speed > 0)
 					currentspeed = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
 			if (this->position.x <= 69 * 23) {
-				if(speed<0)
+				if (speed < 0)
 					currentspeed = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
@@ -168,16 +169,16 @@ bool Enemy::Update()
 			else {
 				currentspeed = speed;
 			}
-			
+
 		}
 		else {
-			
-			if (pather->At(2)->x < this->position.x+10 && enemymuerto == false) {
+
+			if (pather->At(2)->x < this->position.x + 10 && enemymuerto == false) {
 				currentspeed = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (pather->At(2)->x > this->position.x+10 && enemymuerto == false) {
+			if (pather->At(2)->x > this->position.x + 10 && enemymuerto == false) {
 				currentspeed = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
@@ -188,9 +189,9 @@ bool Enemy::Update()
 	if (!grounded) {
 		yVel -= GRAVITY_Y * 0.02;
 	}
-	if (timer<=0) {
-		
-		
+	if (timer <= 0) {
+
+
 		SDL_DestroyTexture(texture);
 		pbody->body->SetActive(false);
 		enemymuerto = false;
@@ -204,7 +205,7 @@ bool Enemy::Update()
 	if (enemymuerto == true) {
 		timer--;
 	}
-	
+
 	if (playermuerto == true) {
 		timer2--;
 	}
@@ -249,14 +250,14 @@ bool Enemy::Update()
 	return true;
 }
 
-bool Enemy::CleanUp()
+bool EnemyV::CleanUp()
 {
 	return true;
 }
 
 
 // L07 DONE 6: Define OnCollision function for the player. Check the virtual function on Entity class
-void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
+void EnemyV::OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	// L07 DONE 7: Detect the type of collision
 
@@ -286,13 +287,7 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		playermuerto = true;
 		LOG("Collision PLAYER");
-		break;
 
-	case ColliderType::ENEMYV:
-		playermuerto = true;
-		LOG("Collision PLAYER");
-		break;
-		
 	default: grounded = false;
 
 	}

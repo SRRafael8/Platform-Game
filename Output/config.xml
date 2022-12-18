@@ -25,7 +25,7 @@
   <scene>
     <player x="150" y="672" texturepath="Assets/Textures/player0.png"/>
 	<enemy x="150"  y="672" texturepath="Assets/Textures/Mushroom.png"/>
-	<enemy2 x="150"  y="672" texturepath="Assets/Textures/Eye.png"/>
+	<enemyV x="150"  y="672" texturepath="Assets/Textures/Eye.png"/>
   </scene>
 
   <map>
