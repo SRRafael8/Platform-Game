@@ -1,4 +1,3 @@
-#include "Enemy.h"
 #include "EnemyV.h"
 #include "App.h"
 #include "Textures.h"
@@ -179,6 +178,9 @@ bool EnemyV::Update()
 					currentspeedx = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
+			}
+			else {
+				currentAnimation = &idleanim;
 			}
 
 		}
