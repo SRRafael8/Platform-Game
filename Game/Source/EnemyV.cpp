@@ -181,15 +181,24 @@ bool EnemyV::Update()
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x <= app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto == false) {
+			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x < app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x && enemymuerto == false) {
 				currentspeedx = 1;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
 			}
-			else {
-				currentAnimation = &rightwalk;
-				
+			if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).x == app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).x) {
+				if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).y > app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).y && enemymuerto == false) {
+					currentspeedy = -1;
+					app->audio->PlayFx(runsound);
+					currentAnimation = &leftwalk;
+				}
+				if (app->map->WorldToMap(app->scene->enemyV->position.x, app->scene->enemyV->position.y + 23).y <= app->map->WorldToMap(app->scene->player->position.x, app->scene->player->position.y + 23).y && enemymuerto == false) {
+					currentspeedy = 1;
+					app->audio->PlayFx(runsound);
+					currentAnimation = &rightwalk;
+				}
 			}
+			
 
 		}
 		else {
