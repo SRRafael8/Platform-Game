@@ -12,11 +12,12 @@ When you win/die, the game will ask you to press a key to close the game, do so.
  - A -> Move Left
  - D -> Move Right
  - SPACE -> Jump
+ - ATTACK -> K
 
 ## Key Extras
 
  - F9 -> Debug mode (Show collisions).
- - F10 -> Godmode (not finished).
+ - F10 -> Godmode.
  
 ## Developers
 
