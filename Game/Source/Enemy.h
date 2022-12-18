@@ -77,6 +77,7 @@ private:
 
 	int timer = 50;
 	int timer2 = 100;
+	int speed = 1;
 
 	float playerpositionx;
 	float playerpositiony;

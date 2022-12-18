@@ -137,7 +137,7 @@ bool Enemy::Update()
 	iPoint originScreen = app->map->MapToWorld(origin.x, origin.y);
 	app->render->DrawTexture(originTex, originScreen.x, originScreen.y);
 
-	int speed = 1;
+	
 	int currentspeed = 0;
 
 	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
@@ -151,17 +151,22 @@ bool Enemy::Update()
 		//}
 		const DynArray<iPoint>* pather = app->pathfinding->GetLastPath();
 		if (pather->At(1) == nullptr) {
-			currentspeed = speed;
 			
-			if (this->position.x >= 81 * 23) {
-				currentspeed = -speed;
+			
+			if (this->position.x >= 80 * 23) {
+				if(speed>0)
+					currentspeed = speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &leftwalk;
 			}
-			if (this->position.x <= 68 * 23) {
-				currentspeed = speed;
+			if (this->position.x <= 69 * 23) {
+				if(speed<0)
+					currentspeed = -speed;
 				app->audio->PlayFx(runsound);
 				currentAnimation = &rightwalk;
+			}
+			else {
+				currentspeed = speed;
 			}
 			
 		}
