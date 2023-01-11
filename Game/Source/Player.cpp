@@ -247,6 +247,14 @@ bool Player::Update()
 
 	if (ganar == true) {
 		app->render->DrawTexture(texturescene3, 2360, 0);
+		if (app->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
+			position.x = 69;
+			position.y = 80;
+			SDL_DestroyTexture(texturescene3);
+			texturewin = "Assets/Scenes/winscreen.png";
+			
+
+		}
 	}
 
 	if (lose == true) {
@@ -260,7 +268,17 @@ bool Player::Update()
 		if (position.x > 107 * 23 && timer <= 0) {
 			app->render->DrawTexture(texturescene4, 2360, 0);
 		}
+		if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN && lose == true) {
+			losecondition = false;
+			ultimatelosecondition = false;
+			lose = false;
+			pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(80), PIXEL_TO_METERS(150)), 0);
+			SDL_DestroyTexture(texturescene4);
+			texturedeath = "Assets/Scenes/deathscreen.png";
+			currentAnimation = &idleanim;
+		}
 	}
+	
 
 	return true;
 }
