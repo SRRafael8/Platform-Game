@@ -32,7 +32,9 @@ enum class ColliderType {
 	LOSE,
 	ENEMY,
 	ATTACK,
-	ENEMYV
+	ENEMYV,
+	TPDOWN,
+	TPUP
 	// ..
 };
 

@@ -75,6 +75,8 @@ private:
 	bool lose=false;
 	bool ganar=false;
 	bool opciontimer2=false;
+	bool tpdown = false;
+	bool tpup = false;
 
 	float yVel = 0;
 

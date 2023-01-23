@@ -341,6 +341,10 @@ bool Map::Load()
     PhysBody* c21 = app->physics->CreateRectangle(23 * 146, 1 * 23 + 704 + 32 - 275, 23 * 8, 8 * 23, STATIC);
     c21->ctype = ColliderType::PLATFORM;
 
+    //plataforma portal
+    PhysBody* cmoneda = app->physics->CreateRectangle(117*23+12, 5*23, 23 * 9, 23 * 2, STATIC);
+    cmoneda->ctype = ColliderType::PLATFORM;
+
     //plataforma 19 dead
     PhysBody* c22 = app->physics->CreateRectangle(23 * 75, 25 * 23 + 12, 23 * 155, 1 * 23, STATIC);
     c22->ctype = ColliderType::LOSE;
@@ -366,6 +370,12 @@ bool Map::Load()
     c29->ctype = ColliderType::LOSE;
     PhysBody* c30 = app->physics->CreateRectangle(2772, 525, 15, 10, STATIC);
     c30->ctype = ColliderType::LOSE;
+
+    //PORTAL
+    PhysBody* cportalup = app->physics->CreateRectangle(2602, 70, 5, 22*2, STATIC);
+    cportalup->ctype = ColliderType::TPDOWN;
+    PhysBody* cportaldown = app->physics->CreateRectangle(2307, 526, 5, 22 * 2, STATIC);
+    cportaldown->ctype = ColliderType::TPUP;
 
     if(ret == true)
     {

@@ -275,14 +275,20 @@ bool Player::Update()
 			losecondition = false;
 			ultimatelosecondition = false;
 			lose = false;
-			pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(80), PIXEL_TO_METERS(150)), 0);
+			pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(80), PIXEL_TO_METERS(450)), 0);
 			SDL_DestroyTexture(texturescene4);
 			texturedeath = "Assets/Scenes/deathscreen.png";
+			texturescene4 = app->tex->Load(texturedeath);
 			currentAnimation = &idleanim;
 		}
 	}
-	app->render->DrawTexture(portal, 2600, 47);
+	app->render->DrawTexture(portal, 2600, 44);
 	app->render->DrawTexture(portal, 2305, 500);
+
+	if (tpup == true) {
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2650), PIXEL_TO_METERS(70)), 0);
+		tpup = false;
+	}
 
 	return true;
 }
@@ -336,6 +342,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 			losecondition = true;
 			lose = true;
 			break;
+		case ColliderType::TPDOWN:
+			LOG("Collision PORTAL");
+			tpdown = true;			
+			break;
+		case ColliderType::TPUP:
+			LOG("Collision PORTAL");
+			tpup = true;		
+			break;
+			
 
 		default: grounded = false;
 			
