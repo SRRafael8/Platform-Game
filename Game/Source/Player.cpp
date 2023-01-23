@@ -289,6 +289,10 @@ bool Player::Update()
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2650), PIXEL_TO_METERS(70)), 0);
 		tpup = false;
 	}
+	if (tpdown == true) {
+		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2350), PIXEL_TO_METERS(510)), 0);
+		tpdown = false;
+	}
 
 	return true;
 }
