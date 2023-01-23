@@ -50,6 +50,9 @@ private:
 	SDL_Texture* texturescene4;
 	const char* texturedeath;
 	const char* texturewin;
+
+	SDL_Texture* portal;
+	const char* textureportal;
 	
 
 	// L07 DONE 5: Add physics to the player - declare a Physics body

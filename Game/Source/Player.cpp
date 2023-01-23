@@ -79,6 +79,8 @@ bool Player::Awake() {
 	texturePath = "Assets/Textures/Player0.png";
 	texturedeath= "Assets/Scenes/deathscreen.png";
 	texturewin= "Assets/Scenes/winscreen.png";
+
+	textureportal = "Assets/Textures/Portal.png";
 	
 
 	//L02: DONE 5: Get Player parameters from XML
@@ -95,6 +97,7 @@ bool Player::Start() {
 	texture = app->tex->Load(texturePath);
 	texturescene3 = app->tex->Load(texturewin);
 	texturescene4 = app->tex->Load(texturedeath);
+	portal = app->tex->Load(textureportal);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x -50, position.y-276, 12, bodyType::DYNAMIC);
@@ -278,7 +281,8 @@ bool Player::Update()
 			currentAnimation = &idleanim;
 		}
 	}
-	
+	app->render->DrawTexture(portal, 2600, 47);
+	app->render->DrawTexture(portal, 2305, 500);
 
 	return true;
 }
