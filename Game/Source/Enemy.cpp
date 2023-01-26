@@ -239,6 +239,12 @@ bool Enemy::Update()
 		}
 	}
 
+	/*if (reviveenemy == true) {
+		texture = app->tex->Load(texturePath);
+		pbody = app->physics->CreateRectangle(position.x + 80 + (70 * 23), position.y - 253, 18, 36, bodyType::DYNAMIC);
+		reviveenemy = false;
+	}*/
+
 	return true;
 }
 

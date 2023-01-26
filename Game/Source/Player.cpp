@@ -81,6 +81,7 @@ bool Player::Awake() {
 	texturewin= "Assets/Scenes/winscreen.png";
 
 	textureportal = "Assets/Textures/Portal.png";
+	texturecoin = "Assets/Textures/Coin.png";
 	
 
 	//L02: DONE 5: Get Player parameters from XML
@@ -98,6 +99,7 @@ bool Player::Start() {
 	texturescene3 = app->tex->Load(texturewin);
 	texturescene4 = app->tex->Load(texturedeath);
 	portal = app->tex->Load(textureportal);
+	coin = app->tex->Load(texturecoin);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x -50, position.y-276, 12, bodyType::DYNAMIC);
@@ -123,6 +125,19 @@ bool Player::Start() {
 
 bool Player::Update()
 {
+
+	app->render->DrawTexture(portal, 2600, 44);
+	app->render->DrawTexture(portal, 2305, 500);
+	app->render->DrawTexture(coin, 2655, 63);
+	app->render->DrawTexture(coin, 2685, 63);
+	app->render->DrawTexture(coin, 2715, 63);
+	app->render->DrawTexture(coin, 2745, 63);
+	app->render->DrawTexture(coin, 2775, 63);
+	app->render->DrawTexture(coin, 2655, 43);
+	app->render->DrawTexture(coin, 2685, 43);
+	app->render->DrawTexture(coin, 2715, 43);
+	app->render->DrawTexture(coin, 2745, 43);
+	app->render->DrawTexture(coin, 2775, 43);
 
 	// L07 DONE 5: Add physics to the player - updated player position using physics
 	
@@ -251,12 +266,12 @@ bool Player::Update()
 	if (ganar == true) {
 		app->render->DrawTexture(texturescene3, 2360, 0);
 		if (app->input->GetKey(SDL_SCANCODE_RETURN)==KEY_DOWN) {
-			position.x = 69;
-			position.y = 80;
+			wincondition = false;
+			ganar = false;
+			pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(80), PIXEL_TO_METERS(450)), 0);
 			SDL_DestroyTexture(texturescene3);
-			texturewin = "Assets/Scenes/winscreen.png";
-			
-
+			texturescene3 = app->tex->Load(texturewin);
+			currentAnimation = &idleanim;
 		}
 	}
 
@@ -277,13 +292,12 @@ bool Player::Update()
 			lose = false;
 			pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(80), PIXEL_TO_METERS(450)), 0);
 			SDL_DestroyTexture(texturescene4);
-			texturedeath = "Assets/Scenes/deathscreen.png";
 			texturescene4 = app->tex->Load(texturedeath);
 			currentAnimation = &idleanim;
+			reviveenemy = true;
+			reviveenemyv = true;
 		}
 	}
-	app->render->DrawTexture(portal, 2600, 44);
-	app->render->DrawTexture(portal, 2305, 500);
 
 	if (tpup == true) {
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2650), PIXEL_TO_METERS(70)), 0);
@@ -292,6 +306,10 @@ bool Player::Update()
 	if (tpdown == true) {
 		pbody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(2350), PIXEL_TO_METERS(510)), 0);
 		tpdown = false;
+	}
+
+	if (coincatch == true) {
+		
 	}
 
 	return true;
@@ -313,6 +331,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		case ColliderType::ITEM:
 			LOG("Collision ITEM");
 			app->audio->PlayFx(pickCoinFxId);
+			coincatch = true;
 			break;
 		case ColliderType::PLATFORM:
 			LOG("Collision PLATFORM");

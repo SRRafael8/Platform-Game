@@ -53,6 +53,8 @@ private:
 
 	SDL_Texture* portal;
 	const char* textureportal;
+	SDL_Texture* coin;
+	const char* texturecoin;
 	
 
 	// L07 DONE 5: Add physics to the player - declare a Physics body
@@ -77,6 +79,10 @@ private:
 	bool opciontimer2=false;
 	bool tpdown = false;
 	bool tpup = false;
+	bool coincatch = false;
+
+	bool reviveenemy = false;
+	bool reviveenemyv = false;
 
 	float yVel = 0;
 

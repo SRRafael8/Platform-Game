@@ -377,7 +377,29 @@ bool Map::Load()
     PhysBody* cportaldown = app->physics->CreateRectangle(2307, 526, 5, 22 * 2, STATIC);
     cportaldown->ctype = ColliderType::TPUP;
 
-    if(ret == true)
+    //COINS
+    PhysBody* ccoin1 = app->physics->CreateCircle(2671, 59, 8, STATIC);
+    ccoin1->ctype = ColliderType::ITEM;
+    PhysBody* ccoin2 = app->physics->CreateCircle(2701, 59, 8, STATIC);
+    ccoin2->ctype = ColliderType::ITEM;
+    PhysBody* ccoin3 = app->physics->CreateCircle(2731, 59, 8, STATIC);
+    ccoin3->ctype = ColliderType::ITEM;
+    PhysBody* ccoin4 = app->physics->CreateCircle(2761, 59, 8, STATIC);
+    ccoin4->ctype = ColliderType::ITEM;
+    PhysBody* ccoin5 = app->physics->CreateCircle(2791, 59, 8, STATIC);
+    ccoin5->ctype = ColliderType::ITEM;
+    PhysBody* ccoin6 = app->physics->CreateCircle(2671, 79, 8, STATIC);
+    ccoin6->ctype = ColliderType::ITEM;
+    PhysBody* ccoin7 = app->physics->CreateCircle(2701, 79, 8, STATIC);
+    ccoin7->ctype = ColliderType::ITEM;
+    PhysBody* ccoin8 = app->physics->CreateCircle(2731, 79, 8, STATIC);
+    ccoin8->ctype = ColliderType::ITEM;
+    PhysBody* ccoin9 = app->physics->CreateCircle(2761, 79, 8, STATIC);
+    ccoin9->ctype = ColliderType::ITEM;
+    PhysBody* ccoin10 = app->physics->CreateCircle(2791, 79, 8, STATIC);
+    ccoin10->ctype = ColliderType::ITEM;
+
+    if(ret == true) 
     {
         // L04: DONE 5: LOG all the data loaded iterate all tilesets and LOG everything
        

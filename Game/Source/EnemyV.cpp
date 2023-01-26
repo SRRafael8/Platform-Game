@@ -279,6 +279,12 @@ bool EnemyV::Update()
 		}
 	}
 
+	//if (reviveenemyv == true) {
+	//	texture = app->tex->Load(texturePath);
+	//	pbody = app->physics->CreateCircle(position.x + 80 + (40 * 23), position.y - 300, 10, bodyType::DYNAMIC);
+	//	reviveenemyv = false;
+	//}
+
 	return true;
 }
 
