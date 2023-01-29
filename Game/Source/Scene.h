@@ -54,6 +54,7 @@ private:
 	SDL_Texture* texturescene2;
 	
 	SDL_Texture* texturecreditos;
+	SDL_Texture* textureoptions;
 	SDL_Texture* texturescreen3;
 	SDL_Texture* texturescreen4;
 	SDL_Texture* mouseTileTex = nullptr;
@@ -64,6 +65,7 @@ private:
 	const char* texturewin;
 	
 	const char* texturecredits;
+	const char* textureopciones;
 	bool introactiva = true;
 	bool introactiva2 = true;
 	int timer = 200;
@@ -72,6 +74,7 @@ private:
 	bool niveles = 0;
 
 	int timercredits = 3;
+	int timeroptions = 3;
 
 	iPoint origin;
 	bool originSelected = false;

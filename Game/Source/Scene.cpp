@@ -51,6 +51,7 @@ bool Scene::Awake(pugi::xml_node& config)
 	texturewin = "Assets/Scenes/winscreen.png";
 	textureselect = "Assets/Scenes/Selected.png";
 	texturecredits = "Assets/Scenes/Credits.png";
+	textureopciones = "Assets/Scenes/Options.png";
 
 	return ret;
 
@@ -65,6 +66,7 @@ bool Scene::Start()
 	texturescene2 = app->tex->Load(texturelobby);
 	textureselected = app->tex->Load(textureselect);
 	texturecreditos = app->tex->Load(texturecredits);
+	textureoptions = app->tex->Load(textureopciones);
 	// L03: DONE: Load map
 	bool retLoad = app->map->Load();
 
@@ -195,8 +197,11 @@ bool Scene::Update(float dt)
 		if (niveles == 0) {
 			app->render->DrawTexture(texturescene2, 0, 0);
 		}
-		else {
+		else if(niveles==1) {
 			app->render->DrawTexture(texturecreditos, 0, 0);
+		}
+		else if (niveles == 2) {
+			app->render->DrawTexture(textureoptions,0,0);
 		}
 		if (selection == 1 && niveles == 0 && principal==0) {
 			textureselected = app->tex->Load(textureselect);
@@ -206,16 +211,26 @@ bool Scene::Update(float dt)
 				SDL_DestroyTexture(texturescene2);
 				SDL_DestroyTexture(textureselected);
 				principal = 1;
+
 			}
 		}
 		if (selection == 0 && niveles == 0) {
 			textureselected = app->tex->Load(textureselect);
 			app->render->DrawTexture(textureselected, 72, 405);
 			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
-				SDL_DestroyTexture(texturescene);
-				SDL_DestroyTexture(texturescene2);
+				niveles = 2;
 				SDL_DestroyTexture(textureselected);
+				timeroptions = 3;
 			}
+		}
+		if (timeroptions >= 0) {
+			timeroptions--;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timeroptions < 0 && niveles == 2) {
+			niveles = 0;
+			SDL_DestroyTexture(textureoptions);
+			textureoptions = app->tex->Load(textureopciones);
+			app->render->DrawTexture(textureselected, 409, 405);
 		}
 		if (selection == 2 && niveles == 0) {
 			textureselected = app->tex->Load(textureselect);
