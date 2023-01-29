@@ -254,8 +254,9 @@ bool Player::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 15;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && app->scene->selection==1) {
 		introactiva = false;
+		SDL_DestroyTexture(app->scene->textureselected);
 	}
 	if (introactiva == false) {
 		app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);

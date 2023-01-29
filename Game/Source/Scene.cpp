@@ -49,6 +49,8 @@ bool Scene::Awake(pugi::xml_node& config)
 	texturelobby = "Assets/Scenes/lobbyscreen.png";
 	texturedeath = "Assets/Scenes/deathscreen.png";
 	texturewin = "Assets/Scenes/winscreen.png";
+	textureselect = "Assets/Scenes/Selected.png";
+	texturecredits = "Assets/Scenes/Credits.png";
 
 	return ret;
 
@@ -61,6 +63,8 @@ bool Scene::Start()
 	app->audio->PlayMusic("Assets/Audio/Music/medievalsong.mp3");
 	texturescene = app->tex->Load(textureintro);
 	texturescene2 = app->tex->Load(texturelobby);
+	textureselected = app->tex->Load(textureselect);
+	texturecreditos = app->tex->Load(texturecredits);
 	// L03: DONE: Load map
 	bool retLoad = app->map->Load();
 
@@ -114,16 +118,16 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 		app->LoadGameRequest();
 
-	if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
-		app->render->camera.y += 20;
+	//if (app->input->GetKey(SDL_SCANCODE_UP) == KEY_REPEAT)
+	//	app->render->camera.y += 20;
 
-	if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
-		app->render->camera.y -= 20;
+	//if (app->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	//	app->render->camera.y -= 20;
 
-	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_O) == KEY_REPEAT)
 		app->render->camera.x += 20;
 
-	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_REPEAT)
 		app->render->camera.x -= 20;
 	
 	//app->render->DrawTexture(img, 380, 100); // Placeholder not needed any more
@@ -185,11 +189,69 @@ bool Scene::Update(float dt)
 	}
 	if (timer == 0) {
 		introactiva = false;
-		app->render->DrawTexture(texturescene2, 0, 0);
+		
 	}
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
-		SDL_DestroyTexture(texturescene);
-		SDL_DestroyTexture(texturescene2);
+	if (introactiva == false) {
+		if (niveles == 0) {
+			app->render->DrawTexture(texturescene2, 0, 0);
+		}
+		else {
+			app->render->DrawTexture(texturecreditos, 0, 0);
+		}
+		if (selection == 1 && niveles == 0 && principal==0) {
+			textureselected = app->tex->Load(textureselect);
+			app->render->DrawTexture(textureselected, 409, 405);
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+				SDL_DestroyTexture(texturescene);
+				SDL_DestroyTexture(texturescene2);
+				SDL_DestroyTexture(textureselected);
+				principal = 1;
+			}
+		}
+		if (selection == 0 && niveles == 0) {
+			textureselected = app->tex->Load(textureselect);
+			app->render->DrawTexture(textureselected, 72, 405);
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+				SDL_DestroyTexture(texturescene);
+				SDL_DestroyTexture(texturescene2);
+				SDL_DestroyTexture(textureselected);
+			}
+		}
+		if (selection == 2 && niveles == 0) {
+			textureselected = app->tex->Load(textureselect);
+			app->render->DrawTexture(textureselected, 745, 405);
+			if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
+				niveles = 1;
+				SDL_DestroyTexture(textureselected);
+				timercredits = 3;
+			}
+		}
+		if (timercredits >= 0) {
+			timercredits--;
+		}
+		if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && timercredits < 0 && niveles == 1) {
+			niveles = 0;
+			SDL_DestroyTexture(texturecreditos);
+			texturecreditos = app->tex->Load(texturecredits);
+			app->render->DrawTexture(textureselected, 409, 405);
+		}
+	}
+	
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && selection == 1) {
+		selection = 0;
+		
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && selection == 1) {
+		selection = 2;
+		
+	}
+	if (app->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN && selection == 2) {
+		selection = 1;
+		
+	}
+	if (app->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN && selection == 0) {
+		selection = 1;
+		
 	}
 
 

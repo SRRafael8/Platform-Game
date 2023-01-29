@@ -254,7 +254,7 @@ bool EnemyV::Update()
 	position.x = METERS_TO_PIXELS(pbody->body->GetTransform().p.x) - 15;
 	position.y = METERS_TO_PIXELS(pbody->body->GetTransform().p.y) - 14;
 	SDL_Rect rect = currentAnimation->GetCurrentFrame();
-	if (app->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN) {
+	if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN) {
 		introactiva = false;
 	}
 	if (introactiva == false) {
