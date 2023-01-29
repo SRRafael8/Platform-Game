@@ -55,6 +55,11 @@ private:
 	const char* textureportal;
 	SDL_Texture* coin;
 	const char* texturecoin;
+	SDL_Texture* corazon;
+	const char* texturecora;
+
+	SDL_Texture* corazonpartio;
+	const char* texturecoraroto;
 	
 
 	// L07 DONE 5: Add physics to the player - declare a Physics body

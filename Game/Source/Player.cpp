@@ -82,6 +82,10 @@ bool Player::Awake() {
 
 	textureportal = "Assets/Textures/Portal.png";
 	texturecoin = "Assets/Textures/Coin.png";
+
+	texturecora = "Assets/Textures/Corazon.png";
+	texturecoraroto = "Assets/Textures/corazonpartido.png";
+
 	
 
 	//L02: DONE 5: Get Player parameters from XML
@@ -100,6 +104,8 @@ bool Player::Start() {
 	texturescene4 = app->tex->Load(texturedeath);
 	portal = app->tex->Load(textureportal);
 	coin = app->tex->Load(texturecoin);
+	corazon = app->tex->Load(texturecora);
+	corazonpartio = app->tex->Load(texturecoraroto);
 
 	// L07 DONE 5: Add physics to the player - initialize physics body
 	pbody = app->physics->CreateCircle(position.x -50, position.y-276, 12, bodyType::DYNAMIC);
@@ -260,6 +266,7 @@ bool Player::Update()
 	}
 	if (introactiva == false) {
 		app->render->DrawTexture(texture, position.x - 12, position.y - 28, &rect);
+		app->render->DrawTexture(corazon, position.x+10, position.y - 40);
 	}
 	//app->render->DrawTexture(texture, position.x , position.y);
 	currentAnimation->Update();
@@ -277,6 +284,7 @@ bool Player::Update()
 	}
 
 	if (lose == true) {
+		app->render->DrawTexture(corazonpartio, position.x + 10, position.y - 40);
 		timer--;
 		if (position.x < 23 * 5 && timer <= 0) {
 			app->render->DrawTexture(texturescene4, 0, 0);
